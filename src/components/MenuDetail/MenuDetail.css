@@ -1,0 +1,37 @@
+/* .menuDetail {
+    border : black 1px solid;
+} */
+
+.ant-card-actions {
+    margin-bottom : 5px;
+    border : 1px solid blue
+}
+
+.menuImage {
+    
+    border-radius:8;
+
+}
+
+.thumb {
+    font-size : 1.5em;
+    color : rgb(96, 96, 168);
+}
+
+
+
+.iconBtn:hover{ 
+    cursor:pointer;
+}
+
+
+.ant-card-meta-description  {
+    font-size : 2em;
+    color: rgb(128, 115, 115);
+}
+
+
+.ant-card-meta-title  {
+    font-size : 2em;
+    color: rgb(75, 47, 47);
+}

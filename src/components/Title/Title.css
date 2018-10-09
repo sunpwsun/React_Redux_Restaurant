@@ -1,0 +1,59 @@
+.title {
+    background-color:lightsalmon;
+    color: brown;
+    font-size: 4rem;
+    
+    text-align: center;
+    font-weight: 600;
+    
+    border-radius: 3px;
+}
+
+.Location {
+    background-color:white;
+    color: black;
+    font-size: 1.3rem;
+
+    text-align: center;
+    
+    border: solid black 1px;
+    border-radius: 3px;
+}
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.headerItem {
+    flex-grow: 1;
+
+    background-color:powderblue;
+    color: rgb(20, 98, 161);
+    font-size: 1.5rem;
+    
+    text-align: center;
+    font-weight: 400;
+
+}
+
+.headerItem:nth-child(2) {
+    flex-grow: 2;
+
+    font-size: 4rem;
+}
+
+
+
+
+.headerItem:nth-child(3) { 
+
+    padding-top: 50px;
+    cursor:pointer;
+  }
+
+
+.iconCart, .iconOrderHistory {
+    font-size: 2rem
+}
+

@@ -1,0 +1,21 @@
+
+
+.menuListContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.menuListItem {
+    flex-grow: 1;
+}
+
+.menuListItem:nth-child(2) {
+    flex-grow: 2;
+}
+
+.total {
+
+    font-size: 2em;
+    font-weight: bold;
+
+}

@@ -1,0 +1,55 @@
+
+.restaurant-item {
+    padding: 1rem;
+    margin: 0.5rem 3rem 0.5rem 3rem;
+
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+     
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+
+    border: solid 1px black ;
+    border-radius: 3px;  
+}
+
+
+.restaurant-item:hover {
+    background: #e3fafc;
+
+    font-weight: bold;
+  }
+  
+ 
+  .restaurant-item:hover .remove {
+    opacity: 1;
+  }
+
+
+.container {
+    display:flex;
+    flex-direction:row;
+    position: absolute;
+    width: 100%;
+    height: 80%;
+}
+.item{
+
+    color:white;
+    border:1px solid white;
+    flex:1;
+}
+
+/* restaurant list at left side */
+.item:nth-child(1){
+
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.item:nth-child(2){
+
+    margin-right : 5%;
+    margin-bottom : 5%;
+}
