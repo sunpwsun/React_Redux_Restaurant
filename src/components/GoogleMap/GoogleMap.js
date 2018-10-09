@@ -37,10 +37,6 @@ export class GoogleMap extends Component {
 
     render() {
 
-        const style = {
-            width: '45%',
-            height: '85%'
-        }
         const restaurantIcon = {
             url: 'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|0091ff|40|_|%E2%80%A2', // url
             scaledSize: new this.props.google.maps.Size(20, 30), // scaled size
@@ -49,6 +45,12 @@ export class GoogleMap extends Component {
             url:  'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|FFFF24|40|_|%E2%80%A2', // url
             scaledSize: new this.props.google.maps.Size(20, 30), // scaled size
         }
+        const style = {
+            width: '45%',
+            height: '85%'
+        }
+
+        // markers for showing the restaurants
         const markers = this.props.restaurantList.map(
             ({ name, geolocation }) => (
                 <Marker
@@ -72,6 +74,7 @@ export class GoogleMap extends Component {
                 center = {{lat:this.props.mapCenter.lat, lng:this.props.mapCenter.long}}
             >
 
+                
                 <Marker position = {{ lat:this.props.lat, lng:this.props.long }}
                         name={'Current location' }
                         title={'Curren location'}

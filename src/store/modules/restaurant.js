@@ -18,11 +18,9 @@ const GET_MENULIST_PENDING = 'GET_MENULIST_PENDING'
 const GET_MENULIST_SUCCESS = 'GET_MENULIST_SUCCESS'
 const GET_MENULIST_FAILURE = 'GET_MENULIST_FAILURE'
 
-
 const GET_REST_REVIEWS_PENDING = 'GET_REST_REVIEWS_COUNT_PENDING'
 const GET_REST_REVIEWS_SUCCESS = 'GET_REST_REVIEWS_COUNT_SUCCESS'
 const GET_REST_REVIEWS_FAILURE = 'GET_REST_REVIEWS_COUNT_FAILURE'
-
 
 const THUMB_UP_PENDING = 'THUMB_UP_PENDING'
 const THUMB_UP_SUCCESS = 'THUMB_UP_SUCCESS'
@@ -34,8 +32,6 @@ const THUMB_DOWN_FAILURE = 'THUMB_DOWN_FAILURE'
 
 const SET_CLOSEST_CITY_FLAG = 'SET_CLOSEST_CITY_FLAG'
 const SET_FIRST_RESTAURANT_LIST_FETCH = 'SET_FIRST_RESTAURANT_LIST_FETCH'
-
-
 const CHANGE_RESTAURANT_SORT_OPT = 'CHANGE_RESTAURANT_SORT_OPT'
 const SELECT_RESTAURANT = 'SELECT_RESTAURANT' 
 const SELECT_CITY = 'SELECT_CITY'   
@@ -200,9 +196,6 @@ export const thumbDown = ( menuID, restaurantID)=> dispatch => {
 }
     
 
-
-
-///
 export const getMenuList = (restaurantID) => dispatch => {
 
     dispatch( { type: GET_MENULIST_PENDING } )
@@ -222,13 +215,9 @@ export const getMenuList = (restaurantID) => dispatch => {
             })
 } 
 
-
-
-
 export const calcCurrentCity = (cityIndex) => dispatch => {
 
     dispatch( {type: GET_CITYLIST_SUCCESS, selectedCity : cityIndex})
-    
 }
         
 export const getRestaurantList = (cityID) => dispatch => {

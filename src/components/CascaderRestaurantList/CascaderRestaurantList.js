@@ -10,6 +10,7 @@ import './CascaderRestaurantList'
 class CascaderRestaurantList extends Component {
 
 
+    // selecting other restaurant
     handleChangeRestaurant = (restaurantID) => {
         
         console.log('Change Restaurant : ' + restaurantID + ' >')

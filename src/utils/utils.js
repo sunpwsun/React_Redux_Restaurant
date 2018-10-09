@@ -2,7 +2,7 @@
 
 
 export function getTimeStamp() {
-    const d = new Date();
+    const d = new Date()
     const s =   leadingZeros(d.getFullYear(), 4) + '-' +
                 leadingZeros(d.getMonth() + 1, 2) + '-' +
                 leadingZeros(d.getDate(), 2) + ' ' +
@@ -11,17 +11,17 @@ export function getTimeStamp() {
                 leadingZeros(d.getMinutes(), 2) + ':' +
                 leadingZeros(d.getSeconds(), 2);
   
-    return s;
+    return s
 }
 
 export function leadingZeros( n, digits ) {
-    let zero = '';
-    n = n.toString();
+    let zero = ''
+    n = n.toString()
 
     if (n.length < digits) {
         for (let i = 0; i < digits - n.length; i++)
-        zero += '0';
+        zero += '0'
     }
 
-    return zero + n;
+    return zero + n
 }

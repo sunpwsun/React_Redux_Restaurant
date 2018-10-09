@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-//const url = 'http://18.219.68.114:3310'
-const url = 'http://localhost:3310'
+//const url = 'http://18.219.68.114:3310'       // my EC2
+const url = 'http://localhost:3310'             // local
 
 
 // fetch all rests from cityID
@@ -41,15 +41,12 @@ export function getRestaurantReviews( restaurantId ) {
     return axios.get(url + '/api/restaurant_reviews/' + restaurantId )
 }
 
-
-
 export function postRestaurantReview( review ) {
     return axios.post(url + '/api/restaurant/review/', review )
                 .then( response => { console.log( '** [axios] 리뷰 등록 성공 : ', response) } )
                 .catch( response => { console.log(response) } )
 }
 
-// put
 export const updateRestaurantReview = newRating => {
     axios.put(url + '/api/restaurant/rating/', newRating)
 }
@@ -57,6 +54,7 @@ export const updateRestaurantReview = newRating => {
 export const getRestaurantRatingSum = restaurantID => {
     return axios.get(url + '/api/restaurant/sum_rate/' + restaurantID)
 }
+
 export const updateRestaurantRate =  async ( restaurantID, cityID ) => {
     
     let count
@@ -73,10 +71,7 @@ export const updateRestaurantRate =  async ( restaurantID, cityID ) => {
         reviewCount : Number(count)
     }
 
-   
     const ret = await updateRestaurantReview( newRating )
-
- 
     let cityList = await getRestaurantList(cityID) 
 
     return cityList

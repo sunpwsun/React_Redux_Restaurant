@@ -12,6 +12,8 @@ class App extends Component {
     componentDidMount() {
     
         const { RestaurantActions } = this.props
+
+        // Once the app runs, gets the current geolocaion and city list
         RestaurantActions.getCityList()
         RestaurantActions.getPosition()    
     }

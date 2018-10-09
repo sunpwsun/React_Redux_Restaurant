@@ -21,6 +21,7 @@ class CascaderSortBy extends Component {
         defaultVal.push(this.props.restaurantSortBy)
 
 
+        // sorting optins
         const sortOpt = [
             {value:'rating', label:'Rating'},
             {value:'distance', label:'Distance'},

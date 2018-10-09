@@ -10,9 +10,7 @@ import CascaderRestaurantPageContainer from './CascaderRestaurantPageContainer'
 class RestaurantsListContainer extends Component {
 
     handleChangeCity = (cityID) => {
-        
-        RestaurantActions.getRestaurantList(cityID)
-                        
+        RestaurantActions.getRestaurantList(cityID)            
     }
 
     handleSelectRestaurant = (restaurantID) => {

@@ -24,11 +24,10 @@ class AppContainer extends Component {
             for( i = 0 ; i < cityList.length ; i++ ) {
                 
                 dis[ i ] =  Math.pow( cityList[ i ].latitude  - lat, 2 ) +
-                            Math.pow( cityList[ i ].longitude - long, 2 )
-                
+                            Math.pow( cityList[ i ].longitude - long, 2 )                
             }
 
-            // find which city is closest
+            // finds which city is closest
             const closestCityIndex = dis.indexOf( Math.min.apply( null, dis ) )
 
             

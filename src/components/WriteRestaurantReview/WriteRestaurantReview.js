@@ -21,7 +21,7 @@ class WriteRestaurantReview extends Component {
         this.setState({ value: e })
     }
 
-    handleRefreshRestaurantList(cityList) {
+    handleRefreshRestaurantList() {
         this.props.RestaurantActions.getRestaurantList(this.props.selectedCityID)
     }
 
@@ -40,12 +40,13 @@ class WriteRestaurantReview extends Component {
                 message.success('Thanks you for your review!')
 
 
-
+///////Modify after adding login functions///////
                 const restaurantReview = 
                     { 
                         name: 'test_user',
                         userID : 'test_user@test.com',
                     }
+/////////////////////////////////////                    
                 restaurantReview[ 'date' ] = getTimeStamp().substring(  0, 10 )
                 restaurantReview[ 'time' ] = getTimeStamp().substring( 11, 16 )
                 restaurantReview[ 'rating' ] = values.rate
@@ -53,11 +54,11 @@ class WriteRestaurantReview extends Component {
                 restaurantReview[ 'restaurantID' ] = this.props.restaurantI
 
 
-                // insert the rview into DB
+                // inserts the rview into DB
                 this.props.RestaurantActions.insertRestaurantReview( restaurantReview )
                     .then( ()=>{
 
-                        // update avg rating for the restaurant
+                        // updates avg rating for the restaurant
                         this.props.RestaurantActions.updateRestaurantRate(this.props.restaurantID, this.props.selectedCityID).then((res)=>{
                             this.handleRefreshRestaurantList(res.data)
                         })

@@ -13,8 +13,8 @@ import { bindActionCreators } from 'redux'
 class RestaurantDetail extends Component {
 
     state = { 
-        viewReviewsVisible: false,
-        writeReviewVisible: false
+        viewReviewsVisible: false,      // modal for viewing
+        writeReviewVisible: false       // modal for writing
     }
 
     showViewReviews = (restaurantID) => {
@@ -68,6 +68,8 @@ class RestaurantDetail extends Component {
     render() {
 
         const { restaurantID, name, rating, addr, tel, atmosphere, reviewCount, distance, onSelectRestaurant } = this.props
+
+        // rounds numbers
         const dis = distance.toFixed(2) 
         const fixedRating = rating.toFixed(1)
 

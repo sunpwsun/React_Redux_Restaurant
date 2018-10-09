@@ -8,14 +8,20 @@ import * as restaurantActions from '../../store/modules/restaurant'
 import { RestaurantActions } from '../../store/actionCreators'
 
 
+// shows city list
 class CascaderCityList extends Component {
 
 
+    // moves to other city
     handleChangeCity = (cityID) => {
 
         RestaurantActions.selectCity(cityID)
+
+        // after selecting new city, gets all the restaurants
         RestaurantActions.getRestaurantList(cityID)
 
+
+        // setting a center position at the google map
         if( this.props.closestCityID !== cityID[0] ) {
 
             this.props.cityList.forEach(element => {
