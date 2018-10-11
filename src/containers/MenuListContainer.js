@@ -3,6 +3,7 @@ import Title from '../components/Title/Title'
 import { List,Icon, Drawer, Table, Divider, Button } from 'antd'
 import MenuDetail from '../components/MenuDetail/MenuDetail'
 import CascaderMenuPageContainer from './CascaderMenuPageContainer'
+import CreditCardForm from '../components/CreditCardForm/CreditCardForm'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as restaurantActions from '../store/modules/restaurant'
@@ -15,7 +16,21 @@ class MenuListContainer extends Component {
     state = {
         menu : [],
         drawerVisible: false,
-        cart : []
+        cart : [],
+
+        creditCardFormVisible: false
+    }
+
+    showCreditCardFormModal = () => {
+        this.setState({
+            creditCardFormVisible: true,
+        })
+    }
+    
+     hideCreditCardFormModal = () => {
+        this.setState({
+            creditCardFormVisible: false,
+        })
     }
 
 
@@ -221,9 +236,21 @@ class MenuListContainer extends Component {
                     }}
                 >
 
-                    <Button onClick={this.onClose} type="primary">Order</Button>
+                    <Button onClick={this.showCreditCardFormModal} type="primary">Order</Button>
                 </div>
                 </Drawer>
+
+
+
+                <CreditCardForm 
+                    visible = {this.state.creditCardFormVisible}
+                    onShow = {this.showCreditCardFormModal}
+                    onHide = {this.hideCreditCardFormModal}
+                />
+                    
+
+
+
  
             </div>
         )
