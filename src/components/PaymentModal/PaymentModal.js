@@ -19,7 +19,7 @@ console.log('cart, totalPrice, totalItems', cart, totalPrice, totalItems)
 
                    
                     onDrawClose={this.props.onDrawClose}
-                
+                    footer={[]}
                 >
 
                     <Payments 

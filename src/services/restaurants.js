@@ -103,3 +103,12 @@ export const addPaymentHistory = async (receipt) => {
                         .then( response => { console.log( '** [axios] payment add success: ', response) } )
                         .catch( response => { console.log('** [axios] payment add failed: ',response) } )
 }
+
+
+export const getOrderHistory = async (userID) => {
+
+    return await axios.get( url + '/api/receipt/user/' + userID )
+                        // .then( response => { console.log( '** [axios] payment history: ', response) } )
+                        // .catch( response => { console.log('** [axios] payment history failed: ',response) } )
+}
+

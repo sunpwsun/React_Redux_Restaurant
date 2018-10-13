@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Title from '../components/Title/Title'
-import { List,Icon, Drawer, Table, Divider, Button } from 'antd'
+import { List,Icon, Drawer, Table, Divider, Button, message } from 'antd'
 import MenuDetail from '../components/MenuDetail/MenuDetail'
 import CascaderMenuPageContainer from './CascaderMenuPageContainer'
 import PaymentModal from '../components/PaymentModal/PaymentModal'

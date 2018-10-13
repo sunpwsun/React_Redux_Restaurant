@@ -8,21 +8,17 @@ import { bindActionCreators } from 'redux'
 import './Payments.css'
 import {Button} from 'antd'
 import { getTimeStamp } from '../../utils/utils'
+import {message} from 'antd'
 
 
 
 class Payments extends Component {
 
 
-    // state = {
-    //     amount : 0,
-    //     currency : 'USD',
-    //     description : '',
-    //     restaurantID : 0,
-    //     restaurantName : '',
-    //     cart : [],
-    //     totalItems : 0
-    // }
+    showSuccessMessage = () => {
+        message.config({ top: 300 })
+        message.info('Thank you for your payment.');
+    }
 
     handleStripeToken = async (token, description, totalPayableStripe , restaurantName) => {
      
@@ -39,9 +35,6 @@ console.log('stripe result', this.props.stripeResult.outcome)
 
         if( this.props.stripeResult.outcome.type === 'authorized') {
 
-            // shows 'success' message
-
-console.log('SUCCESS')
 
             // adds the transcation into the order history
             const dateTime = getTimeStamp()
@@ -58,6 +51,11 @@ console.log('SUCCESS')
             }
             service.addPaymentHistory(receipt)
 
+
+
+            // shows 'success' message
+            this.showSuccessMessage()
+console.log('SUCCESS')
 
             // clear cart
             this.props.RestaurantActions.clearCart()
