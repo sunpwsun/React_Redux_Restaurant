@@ -63,7 +63,7 @@ console.log('SUCCESS')
             this.props.RestaurantActions.clearCart()
 
             // close Check out modal
-            this.props.onHide()
+            this.props.onPaymentModalHide()
 
             // close Drawer
             this.props.onDrawClose()

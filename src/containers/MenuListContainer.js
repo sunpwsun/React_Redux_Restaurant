@@ -245,7 +245,7 @@ class MenuListContainer extends Component {
                 <PaymentModal 
                     visible = {this.state.creditCardFormVisible}
                     onShow = {this.showPaymentModal}
-                    onHide = {this.hidePaymentModal}
+                    onPaymentModalHide = {this.hidePaymentModal}
                     onDrawClose = {this.onDrawerClose}
                     cart = {cart}
                     totalPrice = {totalPrice}

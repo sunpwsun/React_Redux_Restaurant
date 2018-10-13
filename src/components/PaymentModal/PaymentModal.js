@@ -15,9 +15,9 @@ console.log('cart, totalPrice, totalItems', cart, totalPrice, totalItems)
                     title="Check Out"
                     visible={this.props.visible}
                     onOk={this.props.onProcessPayment}
-                    onCancel={this.props.onHide}
+                    onCancel={this.props.onPaymentModalHide}
 
-                    onHide={this.props.onHide}
+                   
                     onDrawClose={this.props.onDrawClose}
                 
                 >
@@ -27,6 +27,8 @@ console.log('cart, totalPrice, totalItems', cart, totalPrice, totalItems)
                         cart = {cart}
                         totalPrice = {totalPrice}
                         totalItems = {totalItems}
+                        onPaymentModalHide = {this.props.onPaymentModalHide}
+                        onDrawClose ={this.props.onDrawClose}
                     />
                 </Modal>
             </div>
