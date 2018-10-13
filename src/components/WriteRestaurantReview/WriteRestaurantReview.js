@@ -4,7 +4,7 @@ import './WriteRestaurantReview.css'
 import * as restaurantAction from  '../../store/modules/restaurant'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
-import utils, { getTimeStamp } from '../../utils/utils'
+import { getTimeStamp } from '../../utils/utils'
 
 
 class WriteRestaurantReview extends Component {

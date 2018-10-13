@@ -8,12 +8,13 @@ import { RestaurantActions } from '../../store/actionCreators'
 import './CascaderRestaurantList'
 
 class CascaderRestaurantList extends Component {
-
-
+ 
+  
     // selecting other restaurant
     handleChangeRestaurant = (restaurantID) => {
         
         console.log('Change Restaurant : ' + restaurantID + ' >')
+        RestaurantActions.selectRestaurant(Number(restaurantID ))
         RestaurantActions.getMenuList(restaurantID)
     }
 

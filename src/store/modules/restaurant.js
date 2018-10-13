@@ -39,8 +39,27 @@ const CLEAR_REVIEWS = 'CLEAR_REVIEWS'
 
 const CHANGE_CART = 'CHANGE_CART'
 const SET_MAP_CENTER = 'SET_MAP_CENTER'
+const HANDLE_STRIPE_TOKEN = 'HANDLE_STRIPE_TOKEN'
+const CLEAR_CART = 'CLEAR_CART'
 
+export const clearCart = () => dispatch => {
 
+    dispatch({
+        type: CLEAR_CART
+    }) 
+}
+
+export const handleStripeToken = token => async dispatch => {
+    return await service.handleStripeToken( token )
+        .then( response => {
+console.log('[handleStripeToken] A')           
+            dispatch({
+                type: HANDLE_STRIPE_TOKEN,
+                payload: response.data
+            }) 
+        })
+
+}
 
 export const setMapCenter = ( lat, long ) => dispatch => {
 
@@ -67,6 +86,7 @@ export const selectCity = (cityID) => dispatch => {
 }
 
 export const selectRestaurant = (restaurantID) => dispatch => {
+console.log('NEW REST A', restaurantID)    
     dispatch({
         type : SELECT_RESTAURANT,
         payload : restaurantID
@@ -113,7 +133,6 @@ export const changeRestaurantSortOpt = (option) => dispatch => {
     })
 }
 
-
 export const getCityList = () => dispatch => {
 
     dispatch( { type: GET_CITYLIST_PENDING } )
@@ -133,7 +152,6 @@ export const getCityList = () => dispatch => {
                 })
             })
 } 
-
 
 export const thumbUp = ( menuID, restaurantID) => dispatch => {
 
@@ -195,7 +213,6 @@ export const thumbDown = ( menuID, restaurantID)=> dispatch => {
             })
 }
     
-
 export const getMenuList = (restaurantID) => dispatch => {
 
     dispatch( { type: GET_MENULIST_PENDING } )
@@ -241,7 +258,6 @@ export const getRestaurantList = (cityID) => dispatch => {
             })
 }     
 
-
 export const getRestaurantReviews = (restaurantID) => dispatch => {
 
     dispatch( {type: GET_REST_REVIEWS_PENDING })
@@ -267,8 +283,6 @@ export const clearReviews = () => dispatch => {
 
     dispatch( {type: CLEAR_REVIEWS})
 }
-
-
 
 export const insertRestaurantReview = (review) => dispatch => {
 
@@ -308,11 +322,31 @@ const initialState = {
     menuCount : [],
     price :[],
     mapCenter : {},
-    selectedCityObject : {}
+    selectedCityObject : {},
+    stripeResult : {}
 }
 
 
 export default handleActions({
+
+    [CLEAR_CART] : (state, action) => {
+     
+console.log('[CLEAR_CART')        
+        return {
+            ...state,
+            menuCount : [],
+            price :[],
+        }
+    },
+
+    [HANDLE_STRIPE_TOKEN] : (state, action) => {
+
+console.log('[STRIPE response]',action.payload)        
+        return {
+            ...state,
+            stripeResult : action.payload
+        }
+    },
 
     [CHANGE_CART]: (state, action) => {
         return {
@@ -342,6 +376,7 @@ export default handleActions({
         }
     },
     [SELECT_RESTAURANT] :  (state, action) => {
+console.log('NEW REST B', action.payload)        
         return {
             ...state,
             selectedRestaurantID : action.payload

@@ -3,7 +3,7 @@ import Title from '../components/Title/Title'
 import { List,Icon, Drawer, Table, Divider, Button } from 'antd'
 import MenuDetail from '../components/MenuDetail/MenuDetail'
 import CascaderMenuPageContainer from './CascaderMenuPageContainer'
-import CreditCardForm from '../components/CreditCardForm/CreditCardForm'
+import PaymentModal from '../components/PaymentModal/PaymentModal'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as restaurantActions from '../store/modules/restaurant'
@@ -21,13 +21,13 @@ class MenuListContainer extends Component {
         creditCardFormVisible: false
     }
 
-    showCreditCardFormModal = () => {
+    showPaymentModal = () => {
         this.setState({
             creditCardFormVisible: true,
         })
     }
     
-     hideCreditCardFormModal = () => {
+    hidePaymentModal = () => {
         this.setState({
             creditCardFormVisible: false,
         })
@@ -133,7 +133,7 @@ class MenuListContainer extends Component {
                 j++
             }
         }
-        totalPrice = totalPrice.toFixed(1)
+        totalPrice = totalPrice.toFixed(2)
 
 
         const { Column } = Table;
@@ -192,7 +192,7 @@ class MenuListContainer extends Component {
                             aligh="center"
                         />
                         <Column
-                            title="#"
+                            title="Qty"
                             dataIndex="items"
                             key="items"
                             aligh="center"
@@ -236,16 +236,20 @@ class MenuListContainer extends Component {
                     }}
                 >
 
-                    <Button onClick={this.showCreditCardFormModal} type="primary">Order</Button>
+                    <Button onClick={this.showPaymentModal} type="primary">Check out</Button>
                 </div>
                 </Drawer>
 
 
 
-                <CreditCardForm 
+                <PaymentModal 
                     visible = {this.state.creditCardFormVisible}
-                    onShow = {this.showCreditCardFormModal}
-                    onHide = {this.hideCreditCardFormModal}
+                    onShow = {this.showPaymentModal}
+                    onHide = {this.hidePaymentModal}
+                    onDrawClose = {this.onDrawerClose}
+                    cart = {cart}
+                    totalPrice = {totalPrice}
+                    totalItems = {totalItems}
                 />
                     
 
@@ -262,8 +266,8 @@ export default connect(
     (state) => ({
         menuList : state.restaurant.menuList,
         selectedRestaurantID : state.restaurant.selectedRestaurantID,
-        price : state.restaurant.price,
-        menuCount : state.restaurant.menuCount
+        price : state.restaurant.price,                 // how much per menu
+        menuCount : state.restaurant.menuCount          // how many menus
     }),
     (dispatch) => ({
         RestaurantActions: bindActionCreators(restaurantActions, dispatch)

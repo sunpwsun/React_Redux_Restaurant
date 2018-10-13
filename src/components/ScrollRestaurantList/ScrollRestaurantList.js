@@ -44,7 +44,7 @@ class ScrollRestaurantList extends Component {
     }
 
     handleChangeRestaurant = (e) => {
-
+console.log('[scroll rest list]', e)
         this.props.RestaurantActions.selectRestaurant(e)
     }
 

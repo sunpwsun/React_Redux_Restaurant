@@ -89,3 +89,17 @@ export const thumbDown = async (menuID) => {
     return await axios.put(url + '/api/menu/thumbDown', { menuID : id} )
 }
 
+export const handleStripeToken = async (token) => {
+console.log( '[service] - /api/stripe', token)
+    return await axios.post(url + '/api/stripe', token)
+}
+
+
+
+
+export const addPaymentHistory = async (receipt) => {
+
+    return await axios.post( url + '/api/receipt', receipt )
+                        .then( response => { console.log( '** [axios] payment add success: ', response) } )
+                        .catch( response => { console.log('** [axios] payment add failed: ',response) } )
+}
