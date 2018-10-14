@@ -1,13 +1,13 @@
 
 import React, {Component} from 'react'
-import { Modal, Button } from 'antd'
+import { Modal } from 'antd'
 import Payments from '../Payments/Payments'
 
 class PaymentModal extends Component {
 
     render() {
 
-        const {cart, totalPrice, totalItems, onHide, onDrawClose } = this.props
+        const {cart, totalPrice, totalItems } = this.props
 console.log('cart, totalPrice, totalItems', cart, totalPrice, totalItems)
         return (
             <div>

@@ -25,7 +25,7 @@ class CascaderCityList extends Component {
         if( this.props.closestCityID !== cityID[0] ) {
 
             this.props.cityList.forEach(element => {
-                if(element.cityID == cityID[0]) {
+                if(element.cityID === cityID[0]) {
                     RestaurantActions.setMapCenter( element.latitude, element.longitude)
                 }    
             })

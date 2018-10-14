@@ -68,7 +68,7 @@ console.log('[payment history] - error', payments)
                         <div className='headerItem' >
 
                             <Tooltip title='View your order history'>
-                                <Icon className='iconOrderHistory' onClick={this.showOrderHistory} type="bars" theme="outlined" /> &nbsp;&nbsp; &nbsp; 
+                                <Icon className='iconOrderHistory' onClick={this.showOrderHistory} type="ordered-list" theme="outlined" /> &nbsp;&nbsp; &nbsp; 
                             </Tooltip>
                             <Tooltip title='View cart'>
                                 <span onClick={this.props.showDrawer} ><Icon className='iconCart' type="shopping-cart" theme="outlined" />({this.props.totalItems}) </span>
@@ -78,7 +78,7 @@ console.log('[payment history] - error', payments)
                         <div className='headerItem'> 
 
                             <Tooltip title='View your order history'>
-                                <Icon className='iconOrderHistory' onClick={this.showOrderHistory} type="bars" theme="outlined" /> &nbsp;&nbsp; 
+                                <Icon className='iconOrderHistory' onClick={this.showOrderHistory} type="ordered-list" theme="outlined" /> &nbsp;&nbsp; 
                             </Tooltip>
                         </div>
                 }

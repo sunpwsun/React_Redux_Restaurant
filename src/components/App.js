@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import AppContainer from '../containers/AppContainer'
 import MenuListContainer from '../containers/MenuListContainer'
-import * as service from '../services/restaurants'
 import * as restaurantAction from '../store/modules/restaurant'
+
+
 
 class App extends Component {
 
@@ -22,8 +23,10 @@ class App extends Component {
      
         return (
             <div>
+              
                 <Route exact path = '/'     component = {AppContainer} />
                 <Route       path = '/menu' component = {MenuListContainer} />
+              
             </div>
         )
     }

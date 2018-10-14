@@ -1,4 +1,4 @@
-import { createAction, handleActions } from 'redux-actions'
+import { handleActions } from 'redux-actions'
 import * as service from '../../services/restaurants'
 
 
@@ -8,7 +8,7 @@ const GET_CITYLIST_FAILURE = 'GET_CITYLIST_FAILURE'
 
 const GET_POSITION_PENDING = 'GET_POSITION_PENDING'
 const GET_POSITION_SUCCESS = 'GET_POSITION_SUCCESS'
-const GET_POSITION_FAILURE = 'GET_POSITION_FAILURE'
+//const GET_POSITION_FAILURE = 'GET_POSITION_FAILURE'
 
 const GET_RESTAURANTLIST_PENDING = 'GET_RESTAURANTLIST_PENDING'
 const GET_RESTAURANTLIST_SUCCESS = 'GET_RESTAURANTLIST_SUCCESS'
@@ -24,11 +24,11 @@ const GET_REST_REVIEWS_FAILURE = 'GET_REST_REVIEWS_COUNT_FAILURE'
 
 const THUMB_UP_PENDING = 'THUMB_UP_PENDING'
 const THUMB_UP_SUCCESS = 'THUMB_UP_SUCCESS'
-const THUMB_UP_FAILURE = 'THUMB_UP_FAILURE'
+//const THUMB_UP_FAILURE = 'THUMB_UP_FAILURE'
 
 const THUMB_DOWN_PENDING = 'THUMB_DOWN_PENDING'
 const THUMB_DOWN_SUCCESS = 'THUMB_DOWN_SUCCESS'
-const THUMB_DOWN_FAILURE = 'THUMB_DOWN_FAILURE'
+//const THUMB_DOWN_FAILURE = 'THUMB_DOWN_FAILURE'
 
 const SET_CLOSEST_CITY_FLAG = 'SET_CLOSEST_CITY_FLAG'
 const SET_FIRST_RESTAURANT_LIST_FETCH = 'SET_FIRST_RESTAURANT_LIST_FETCH'
@@ -142,7 +142,7 @@ export const getCityList = () => dispatch => {
              
                 dispatch({
                     type: GET_CITYLIST_SUCCESS,
-                    payload: response.data
+                    payload: response.data        
                 }) 
             })
             .catch( error => {
@@ -234,7 +234,8 @@ export const getMenuList = (restaurantID) => dispatch => {
 
 export const calcCurrentCity = (cityIndex) => dispatch => {
 
-    dispatch( {type: GET_CITYLIST_SUCCESS, selectedCity : cityIndex})
+    dispatch( {
+        type: GET_CITYLIST_SUCCESS, selectedCity : cityIndex})
 }
         
 export const getRestaurantList = (cityID) => dispatch => {
@@ -295,7 +296,14 @@ export const updateRestaurantRate = (restaurantID, cityID) => dispatch => {
     return service.updateRestaurantRate( restaurantID, cityID )
 }
 
+export const updateThumbUpList = (menuID, list) => async dispatch => {
 
+    return await service.updateThumbUpList(menuID, list)
+}
+export const updateThumbDownList = (menuID, list) => async dispatch => {
+
+    return await service.updateThumbDownList(menuID, list)
+}
 
 
 const initialState = {
@@ -393,7 +401,10 @@ console.log('NEW REST B', action.payload)
         return {
             ...state,
             pendingCity : false,
-            cityList : action.payload
+            cityList : action.payload,
+///////////////////////////////////////////////////
+            userID : 'test_user1'
+///////////////////////////////////////////////////            
         }
     },
     [GET_CITYLIST_FAILURE] : (state, action) => {

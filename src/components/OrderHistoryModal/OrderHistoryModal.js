@@ -54,7 +54,7 @@ class OrderHistoryModal extends Component {
 
                     <Table
                         columns={columns}
-                        bordered
+                        
                         dataSource={data}
                         onRow={(record) => {
                             return {
@@ -62,8 +62,6 @@ class OrderHistoryModal extends Component {
                             }
                           }}
                     />
-
-
 
 
                 </Modal>

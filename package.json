@@ -12,6 +12,7 @@
     "react-dom": "^16.5.2",
     "react-geocode": "^0.1.2",
     "react-hot-loader": "^4.3.11",
+    "react-https-redirect": "^1.0.10",
     "react-infinite-scroller": "^1.2.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

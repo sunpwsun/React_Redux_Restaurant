@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import StripeCheckout from 'react-stripe-checkout'
-import { defaultCoreCipherList } from 'constants';
 import * as restaurantAction from  '../../store/modules/restaurant'
 import * as service from '../../services/restaurants'
 import {connect} from 'react-redux'
@@ -22,13 +21,13 @@ class Payments extends Component {
 
     handleStripeToken = async (token, description, totalPayableStripe , restaurantName) => {
      
-        const {stripeResult, selectedRestaurantID, cart, totalItems, onHide, onDrawClose } = this.props
+        const { selectedRestaurantID, cart, totalItems} = this.props
 
         token[ 'amount' ] = totalPayableStripe
         token[ 'currency' ] = 'USD'
         token[ 'description' ] = description
 console.log('[handleStripeToken] from Paymennt')
-        const res = await this.props.RestaurantActions.handleStripeToken(token)
+        await this.props.RestaurantActions.handleStripeToken(token)
         
 
 console.log('stripe result', this.props.stripeResult.outcome)

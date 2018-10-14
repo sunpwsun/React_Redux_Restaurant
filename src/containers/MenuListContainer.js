@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Title from '../components/Title/Title'
-import { List,Icon, Drawer, Table, Divider, Button, message } from 'antd'
+import { List,Icon, Drawer, Table, Divider, Button } from 'antd'
 import MenuDetail from '../components/MenuDetail/MenuDetail'
 import CascaderMenuPageContainer from './CascaderMenuPageContainer'
 import PaymentModal from '../components/PaymentModal/PaymentModal'
@@ -46,14 +46,96 @@ class MenuListContainer extends Component {
         })
     }
 
-    handleOnThumbUp = (menuID) => {
+    handleOnThumbUp = async (menuID, menuList) => {
 
-        this.props.RestaurantActions.thumbUp( menuID.$numberDecimal, this.props.selectedRestaurantID)
+        //this.props.RestaurantActions.thumbUp( menuID.$numberDecimal, this.props.selectedRestaurantID)
+
+        for( let i = 0 ; i < menuList.length ; i++ ) {
+            
+            if( menuList[i].menuID === menuID ) {   
+
+                // checks if the user already gave thumbDown
+                const downIndex = menuList[i].thumbDownUserID.indexOf( this.props.userID )
+                if( downIndex !== -1 ) {
+                    // Shows message - 'You already gave thumb down'
+
+ console.log( '[you already thumb Down]' )
+                    // return
+                    return
+                }
+                
+                // checks if the user already gave thumbUp
+                const upIndex = menuList[i].thumbUpUserID.indexOf( this.props.userID )
+                if( upIndex === -1 ) {
+                    // add my ID to thumbUp list
+                    menuList[i].thumbUpUserID.push( this.props.userID )
+console.log( '[new thumbUpUserID - ADD]', menuList[i].thumbUpUserID)
+                    
+
+                }
+                else {      // cancel thumbUp
+                    
+                    // removes my ID 
+                    menuList[i].thumbUpUserID.splice( upIndex, 1)
+console.log( '[new thumbUpUserID - DEL]', menuList[i].thumbUpUserID)  
+
+                
+                }
+
+                // update to DB
+                await this.props.RestaurantActions.updateThumbUpList(menuID, menuList[i].thumbUpUserID)
+
+                await this.props.RestaurantActions.getMenuList(this.props.selectedRestaurantID)
+
+                return
+            }
+        }
     }
 
-    handleOnThumbDown = (menuID) => {
+    handleOnThumbDown = async (menuID, menuList) => {
 
-        this.props.RestaurantActions.thumbDown( menuID.$numberDecimal, this.props.selectedRestaurantID)     
+        //this.props.RestaurantActions.thumbDown( menuID.$numberDecimal, this.props.selectedRestaurantID)     
+  
+        for( let i = 0 ; i < menuList.length ; i++ ) {
+            
+            if( menuList[i].menuID === menuID ) {   
+
+                // checks if the user already gave thumbDown
+                const upIndex = menuList[i].thumbUpUserID.indexOf( this.props.userID )
+                if( upIndex !== -1 ) {
+                    // Shows message - 'You already gave thumb up'
+
+ console.log( '[you already thumb Up]' )
+                    // return
+                    return
+                }
+                
+                // checks if the user already gave thumbUp
+                const downIndex = menuList[i].thumbDownUserID.indexOf( this.props.userID )
+                if( downIndex === -1 ) {
+                    // add my ID to thumbUp list
+                    menuList[i].thumbDownUserID.push( this.props.userID )
+console.log( '[new thumbDownUserID - ADD]', menuList[i].thumbDownUserID)
+                    
+
+                }
+                else {  // cancel thumbDown
+                    
+                    // removes my ID 
+                    menuList[i].thumbDownUserID.splice( downIndex, 1)
+console.log( '[new thumbDownUserID - DEL]', menuList[i].thumbDownUserID)  
+
+                
+                }
+
+                // update
+                await this.props.RestaurantActions.updateThumbDownList(menuID, menuList[i].thumbDownUserID)
+
+                await this.props.RestaurantActions.getMenuList(this.props.selectedRestaurantID)
+
+                return
+            }
+        }
     }
 
 
@@ -96,14 +178,43 @@ class MenuListContainer extends Component {
         // making menu list 
         const listData = []
         const menus = this.props.menuList
+
+
+
+
+
+
         for( let i = 0 ; i < menus.length ; i++ ) {
+
+            const thumbUpCount = menus[i].thumbUpUserID.length
+            const thumbDownCount = menus[i].thumbDownUserID.length
+    
+            let myThumb = 'NONE'
+            for( let j = 0 ; j < menus[i].thumbUpUserID.length ; j++ ) {
+                if( menus[i].thumbUpUserID[j] === this.props.userID ) {
+                    myThumb = 'UP'
+                    break
+                }
+            }
+            if( myThumb !== 'UP') {
+                for( let j = 0 ; j < menus[i].thumbDownUserID.length ; j++ ) {
+                    if( menus[i].thumbDownUserID[j] === this.props.userID ) {
+                        myThumb = 'DOWN'
+                        break
+                    }
+                }
+            }
+
             listData.push({  
                 menuID      : menus[i].menuID,             
                 title       : menus[i].name,            
                 description : menus[i].description,
                 content     : menus[i].price,
-                thumbUp     : menus[i].thumbUp,
-                thumbDown   : menus[i].thumbDown,
+                thumbUp     : thumbUpCount,
+                thumbDown   : thumbDownCount,
+                thumbUpUserID : menus[i].thumbUpUserID,
+                thumbDownUserID : menus[i].thumbDownUserID,
+                myThumb     : myThumb,
                 filename    : menus[i].filename,
                 index : i
             })
@@ -157,9 +268,8 @@ class MenuListContainer extends Component {
                                             content = {item.description}
                                             thumbUp  = {item.thumbUp}
                                             thumbDown  = {item.thumbDown}
-                                            content = {item.description}
-                                            onThumbUp  = {this.handleOnThumbUp}
-                                            onThumbDown = {this.handleOnThumbDown}
+                                            onThumbUp  = {()=>this.handleOnThumbUp(item.menuID, listData)}
+                                            onThumbDown = {()=>this.handleOnThumbDown(item.menuID, listData)}
                                             filename = {item.filename}
                                             index = {item.index}
                                             onAddCart = {this.handleOnAddToCart}
@@ -240,8 +350,6 @@ class MenuListContainer extends Component {
                 </div>
                 </Drawer>
 
-
-
                 <PaymentModal 
                     visible = {this.state.creditCardFormVisible}
                     onShow = {this.showPaymentModal}
@@ -252,9 +360,6 @@ class MenuListContainer extends Component {
                     totalItems = {totalItems}
                 />
                     
-
-
-
  
             </div>
         )
@@ -264,6 +369,7 @@ class MenuListContainer extends Component {
  
 export default connect(
     (state) => ({
+        userID : state.restaurant.userID,
         menuList : state.restaurant.menuList,
         selectedRestaurantID : state.restaurant.selectedRestaurantID,
         price : state.restaurant.price,                 // how much per menu
