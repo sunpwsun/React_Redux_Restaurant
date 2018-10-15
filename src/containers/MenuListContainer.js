@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Title from '../components/Title/Title'
 import { List,Icon, Drawer, Table, Divider, Button } from 'antd'
+import { Redirect } from 'react-router-dom'
 import MenuDetail from '../components/MenuDetail/MenuDetail'
 import CascaderMenuPageContainer from './CascaderMenuPageContainer'
 import PaymentModal from '../components/PaymentModal/PaymentModal'
@@ -251,6 +252,9 @@ console.log( '[new thumbDownUserID - DEL]', menuList[i].thumbDownUserID)
 
         return( 
             <div>
+              
+
+
                 <Title pathname={this.props.location.pathname} showDrawer={this.showDrawer} totalItems={totalItems} />
                 <CascaderMenuPageContainer onChange={this.handleChangeRestaurant} />
 

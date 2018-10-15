@@ -32,9 +32,6 @@ export class GoogleMap extends Component {
     }
      
 
-
-
-
     render() {
 
         const restaurantIcon = {
@@ -63,14 +60,15 @@ export class GoogleMap extends Component {
             )
         )
 
-
+console.log('[MAP center B]',this.props.mapCenter.lat, this.props.mapCenter.long)
 
         return ( 
             <Map 
                 style={style} 
                 google={this.props.google} 
                 zoom={15}
-           //     initialCenter = {{ lat:this.props.lat, lng:this.props.long }}
+       //         initialCenter = {{ lat:this.props.lat, lng:this.props.long }}
+                  initialCenter = {{lat:this.props.mapCenter.lat, lng:this.props.mapCenter.long}}
                 center = {{lat:this.props.mapCenter.lat, lng:this.props.mapCenter.long}}
             >
 

@@ -42,6 +42,31 @@ const SET_MAP_CENTER = 'SET_MAP_CENTER'
 const HANDLE_STRIPE_TOKEN = 'HANDLE_STRIPE_TOKEN'
 const CLEAR_CART = 'CLEAR_CART'
 
+const LOGIN_PENDING = 'LOGIN_PENDING'
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+const LOGIN_FAILURE = 'LOGIN_FAILURE'
+
+const LOGIN_AS_GUEST = 'LOGIN_AS_GUEST'
+const LOGOUT = 'LOGOUT'
+
+
+export const logout = () => dispatch => {
+
+    dispatch({
+        type: LOGOUT
+    })
+}
+
+
+
+export const loginGuest = (userID) => dispatch => {
+    dispatch({
+        type: LOGIN_AS_GUEST,
+        payload : userID
+    }) 
+} 
+
+
 export const clearCart = () => dispatch => {
 
     dispatch({
@@ -92,6 +117,27 @@ console.log('NEW REST A', restaurantID)
         payload : restaurantID
     })
 }
+ 
+
+/*
+export const getPosition = () => dispatch => {
+
+    dispatch( { type: GET_POSITION_PENDING } )
+
+        const location ={
+                latitude : 43.645608,
+                longitude : -79.3963145
+        }
+
+        dispatch({
+            type: GET_POSITION_SUCCESS,
+            payload: location
+        })
+
+        getCityList()
+
+}
+ */
 
 export const getPosition = () => dispatch => {
    
@@ -234,8 +280,7 @@ export const getMenuList = (restaurantID) => dispatch => {
 
 export const calcCurrentCity = (cityIndex) => dispatch => {
 
-    dispatch( {
-        type: GET_CITYLIST_SUCCESS, selectedCity : cityIndex})
+    dispatch( { type: GET_CITYLIST_SUCCESS, selectedCity : cityIndex})
 }
         
 export const getRestaurantList = (cityID) => dispatch => {
@@ -306,6 +351,39 @@ export const updateThumbDownList = (menuID, list) => async dispatch => {
 }
 
 
+export const localLogin = (idPwd) => async dispatch => {
+
+// while login processing, the login, guest user, google oauth buttons NOT activiated 
+
+    dispatch({ type: LOGIN_PENDING })
+
+
+
+
+    const res = await service.localLogin(idPwd)
+console.log('[reducer] result', res.data)    
+
+    if( res.data === 'success' ) {
+        // dispatch the logged user
+        dispatch({
+            type: LOGIN_SUCCESS,
+            payload : idPwd.username
+        })
+        return res.data
+    }
+    else {
+        dispatch({
+            type: LOGIN_FAILURE
+        })
+        return res.data
+    }
+
+   
+}
+
+
+
+
 const initialState = {
     pendingPos : false,
     pendingCity : false,
@@ -331,11 +409,59 @@ const initialState = {
     price :[],
     mapCenter : {},
     selectedCityObject : {},
-    stripeResult : {}
+    stripeResult : {},
+
+    userID : null,
+    pendingLogin : false
 }
 
 
 export default handleActions({
+
+
+    [LOGOUT] : (state, action) => {
+           
+        return {
+            ...state,
+            pendingLogin : false,
+            userID : null
+        }
+    },
+
+    [LOGIN_AS_GUEST] : (state, action) => {
+console.log('reducer userID', action.payload)           
+        return {
+            ...state,
+            pendingLogin : false,
+            userID : action.payload
+        }
+    },
+
+    [LOGIN_PENDING] : (state, action) => {
+           
+        return {
+            ...state,
+            pendingLogin : true
+        }
+    },
+
+    [LOGIN_SUCCESS] : (state, action) => {
+           
+        return {
+            ...state,
+            pendingLogin : false,
+            userID : action.payload
+        }
+    },
+
+    [LOGIN_FAILURE] : (state, action) => {
+           
+        return {
+            ...state,
+            pendingLogin : false,
+            userID : null
+        }
+    },
 
     [CLEAR_CART] : (state, action) => {
      
@@ -403,7 +529,7 @@ console.log('NEW REST B', action.payload)
             pendingCity : false,
             cityList : action.payload,
 ///////////////////////////////////////////////////
-            userID : 'test_user1'
+ //           userID : 'test_user1'
 ///////////////////////////////////////////////////            
         }
     },

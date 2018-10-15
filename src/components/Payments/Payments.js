@@ -39,8 +39,10 @@ console.log('stripe result', this.props.stripeResult.outcome)
             const dateTime = getTimeStamp()
             const receipt = {
                 paymentID : this.props.stripeResult.created,
-                userID : 'test_user1',
-                email : 'test_user1@test.com',
+                // userID : 'test_user1',
+                // email : 'test_user1@test.com',
+                userID : this.props.userID,
+                email : this.props.userID,
                 restaurantID : selectedRestaurantID,
                 restaurantName : restaurantName,
                 cart : cart,
@@ -155,7 +157,8 @@ export default connect(
         menuCount : state.restaurant.menuCount,
         price : state.restaurant.price,
         selectedRestaurantID : state.restaurant.selectedRestaurantID,
-        restaurantList : state.restaurant.restaurantList 
+        restaurantList : state.restaurant.restaurantList ,
+        userID : state.restaurant.userID
 
     }),
     (dispatch) => ({

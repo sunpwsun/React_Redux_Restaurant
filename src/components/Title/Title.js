@@ -1,15 +1,30 @@
 import React, {Component} from 'react'
 import './Title.css'
-import { Icon, Tooltip, message } from 'antd'
+import { Icon, Tooltip, message, Badge } from 'antd'
 import 'antd/dist/antd.css'
 import * as service from '../../services/restaurants'
 import OrderHistoryModal from '../OrderHistoryModal/OrderHistoryModal'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {Link} from 'react-router-dom'
+import * as restaurantAction from  '../../store/modules/restaurant'
+
+
 
 class Title extends Component {
 
     state = { 
         orderHistoryModalVisible: false,
         orders : []
+    }
+
+    logout = () => {
+
+        // delete user
+        this.props.RestaurantActions.logout()
+
+        // go to the init page
+        //this.props.history.push('/')
     }
 
     showNoDataMessage = () => {
@@ -31,8 +46,8 @@ class Title extends Component {
 
     showOrderHistory = async () => {
 
-        const payments = await service.getOrderHistory('test_user1')
-
+        //const payments = await service.getOrderHistory('test_user1')
+        const payments = await service.getOrderHistory(this.props.userID)
 
         console.log('[payment history] result :', payments.status )
         if( payments.status === 200 ) {     // OK
@@ -56,32 +71,65 @@ console.log('[payment history] - error', payments)
     }
 
 
+
+
     render() {
+
+        let navIcons = null
+        switch( this.props.pathname ) {
+            case '/menu' :
+                
+                navIcons =  
+                    <div className='headerItem' >
+
+                        <Tooltip title='View your order history'>
+                            <Icon className='iconOrderHistory' onClick={this.showOrderHistory} type="ordered-list" theme="outlined" /> &nbsp;&nbsp;
+                        </Tooltip>
+                        
+                        <Tooltip title='View cart'>
+                            <span className='iconCart' onClick={this.props.showDrawer} > <Icon  type="shopping-cart" theme="outlined" /><Badge count={this.props.totalItems} showZero></Badge> </span>
+                            &nbsp;  
+                        </Tooltip>
+                        <Tooltip title={this.props.userID}>
+                            <span><Icon className='iconUser' type="user" theme="outlined" /> </span>
+                            &nbsp;  
+                        </Tooltip>
+                        <Tooltip title='Log out'>
+                            <Link to='/'><span><Icon className='iconLogout' type="logout" theme="outlined" onClick={this.logout} /></span></Link>
+                        </Tooltip>
+                    </div>
+                   
+                break
+            case '/restaurant' :
+                navIcons = 
+                    <div className='headerItem'> 
+
+                        <Tooltip title='View your order history'>
+                            <Icon className='iconOrderHistory' onClick={this.showOrderHistory} type="ordered-list" theme="outlined" /> &nbsp;
+                        </Tooltip>
+                        <Tooltip title={this.props.userID}>
+                            <span><Icon className='iconUser' type="user" theme="outlined" /> </span>
+                            &nbsp; 
+                        </Tooltip>
+
+                        <Tooltip title='Log out'>
+                            <Link  to='/'><span><Icon className='iconLogout' type="logout" theme="outlined" onClick={this.logout} /></span></Link>
+                        </Tooltip>
+                    </div>
+                break
+
+            default :
+                navIcons = <div className='headerItem'> &nbsp; </div>
+
+                break
+        }
 
         return (
 
            <div className='headerContainer'>
                 <div className='headerItem'></div>
                 <div className='headerItem'>Restaurant United</div>
-                {
-                    this.props.pathname === '/menu' ?
-                        <div className='headerItem' >
-
-                            <Tooltip title='View your order history'>
-                                <Icon className='iconOrderHistory' onClick={this.showOrderHistory} type="ordered-list" theme="outlined" /> &nbsp;&nbsp; &nbsp; 
-                            </Tooltip>
-                            <Tooltip title='View cart'>
-                                <span onClick={this.props.showDrawer} ><Icon className='iconCart' type="shopping-cart" theme="outlined" />({this.props.totalItems}) </span>
-                            </Tooltip>
-                        </div>
-                    :
-                        <div className='headerItem'> 
-
-                            <Tooltip title='View your order history'>
-                                <Icon className='iconOrderHistory' onClick={this.showOrderHistory} type="ordered-list" theme="outlined" /> &nbsp;&nbsp; 
-                            </Tooltip>
-                        </div>
-                }
+                {navIcons}
 
 
                 <OrderHistoryModal 
@@ -96,4 +144,13 @@ console.log('[payment history] - error', payments)
     }
 }
 
-export default Title
+//export default Title
+
+export default connect(
+    (state) => ({
+        userID : state.restaurant.userID
+    }),
+    (dispatch) => ({
+        RestaurantActions: bindActionCreators(restaurantAction, dispatch)
+    })
+)( Title )

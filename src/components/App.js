@@ -2,6 +2,8 @@ import { Route } from 'react-router-dom'
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import SignIn from './SignIn/SignIn'
+import SignUp from './SignUp/SignUp'
 import AppContainer from '../containers/AppContainer'
 import MenuListContainer from '../containers/MenuListContainer'
 import * as restaurantAction from '../store/modules/restaurant'
@@ -23,9 +25,10 @@ class App extends Component {
      
         return (
             <div>
-              
-                <Route exact path = '/'     component = {AppContainer} />
-                <Route       path = '/menu' component = {MenuListContainer} />
+                <Route exact path = '/'                 component = {SignIn} />
+                <Route       path = '/signup'           component = {SignUp} />
+                <Route       path = '/restaurant'       component = {AppContainer} />
+                <Route       path = '/menu'             component = {MenuListContainer} />
               
             </div>
         )

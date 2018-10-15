@@ -10,7 +10,7 @@ class CascaderMenuPageContainer extends Component {
 
         return(
             <div className='cascaderCityList'>
-                <Link to='/' >Change Location</Link> &nbsp;                    
+                <Link to='/restaurant' >Change Location</Link> &nbsp;                    
                     <Divider type="vertical" />
                     &nbsp; Restaurant :&nbsp;
                 <CascaderRestaurantList />

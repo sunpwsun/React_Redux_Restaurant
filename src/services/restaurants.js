@@ -128,3 +128,13 @@ export const getOrderHistory = async (userID) => {
                         // .catch( response => { console.log('** [axios] payment history failed: ',response) } )
 }
 
+
+
+
+export const localLogin = async (idPwd) => {
+    console.log('[axios] local login', idPwd) 
+
+    const res = await axios.post( url + '/auth/login', idPwd )//.then( (res)=>console.log('[axois result - ]', res))
+
+    return res
+}

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Redirect } from 'react-router-dom'
 import * as restaurantActions from '../store/modules/restaurant'
 import Title from '../components/Title/Title'
 import * as service from '../services/restaurants'
@@ -14,7 +15,7 @@ import './AppContainer.css'
 class AppContainer extends Component {
 
     render() {
- 
+ console.log( '[AppContainer Render ] - userId', this.props.userID)
         const {pendingPos, pendingCity, cityList, gotCurrentCity, lat, long} = this.props
 
         if( !pendingCity && !pendingPos) {
@@ -32,12 +33,14 @@ class AppContainer extends Component {
 
             
             if( cityList.length !== 0 && !gotCurrentCity ) {
+ console.log('closestCityIndex', closestCityIndex)     
                 RestaurantActions.setClosestCity( cityList[closestCityIndex].cityID )            
             }
         }
 
         return( 
             <div>
+              
                 <Title pathname={this.props.location.pathname} />
                 { ( pendingCity || pendingPos )
                     ? <div><Spin className='loading' tip='Loading...' size='large' /></div>

@@ -49,11 +49,14 @@
 .headerItem:nth-child(3) { 
 
     padding-top: 50px;
-    cursor:pointer;
+    
   }
 
 
-.iconCart, .iconOrderHistory {
-    font-size: 2rem
+.iconCart, .iconOrderHistory, .iconUser, .iconLogout {
+    font-size: 1.5rem;
+    cursor:pointer;
+
+
 }
 
