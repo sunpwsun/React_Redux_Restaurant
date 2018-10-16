@@ -40,7 +40,9 @@ class AppContainer extends Component {
 
         return( 
             <div>
-              
+                <div>
+                    {!this.props.userID && <Redirect to='/'/>}
+                </div>
                 <Title pathname={this.props.location.pathname} />
                 { ( pendingCity || pendingPos )
                     ? <div><Spin className='loading' tip='Loading...' size='large' /></div>
@@ -64,7 +66,8 @@ export default connect(
         selectedRestaurant  : state.restaurant.selectedRestaurant,
         lat                 : state.restaurant.lat,
         long                : state.restaurant.long,
-        gotCurrentCity      : state.restaurant.gotCurrentCity
+        gotCurrentCity      : state.restaurant.gotCurrentCity,
+        userID              : state.restaurant.userID
     }),
     (dispatch) => ({
         RestaurantActions: bindActionCreators(restaurantActions, dispatch)

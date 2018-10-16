@@ -43,15 +43,15 @@ class WriteRestaurantReview extends Component {
 ///////Modify after adding login functions///////
                 const restaurantReview = 
                     { 
-                        name: 'test_user',
-                        userID : 'test_user@test.com',
+                        name: this.props.userID,
+                        userID : this.props.userID,
                     }
 /////////////////////////////////////                    
                 restaurantReview[ 'date' ] = getTimeStamp().substring(  0, 10 )
                 restaurantReview[ 'time' ] = getTimeStamp().substring( 11, 16 )
                 restaurantReview[ 'rating' ] = values.rate
                 restaurantReview[ 'review' ] = values.Review
-                restaurantReview[ 'restaurantID' ] = this.props.restaurantI
+                restaurantReview[ 'restaurantID' ] = this.props.restaurantID
 
 
                 // inserts the rview into DB
@@ -146,8 +146,8 @@ const WrappedWriteRestaurantReview = Form.create()(WriteRestaurantReview)
 
 export default connect(
     (state) => ({
-        selectedCityID : state.restaurant.selectedCityID
-        
+        selectedCityID : state.restaurant.selectedCityID,
+        userID : state.restaurant.userID
     }),
     (dispatch) => ({
         RestaurantActions: bindActionCreators(restaurantAction, dispatch)

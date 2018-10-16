@@ -46,7 +46,7 @@ const LOGIN_PENDING = 'LOGIN_PENDING'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOGIN_FAILURE = 'LOGIN_FAILURE'
 
-const LOGIN_AS_GUEST = 'LOGIN_AS_GUEST'
+const LOGIN_GUEST_SNS = 'LOGIN_GUEST_SNS'
 const LOGOUT = 'LOGOUT'
 
 
@@ -59,9 +59,9 @@ export const logout = () => dispatch => {
 
 
 
-export const loginGuest = (userID) => dispatch => {
+export const login = (userID) => dispatch => {
     dispatch({
-        type: LOGIN_AS_GUEST,
+        type: LOGIN_GUEST_SNS,
         payload : userID
     }) 
 } 
@@ -428,7 +428,7 @@ export default handleActions({
         }
     },
 
-    [LOGIN_AS_GUEST] : (state, action) => {
+    [LOGIN_GUEST_SNS] : (state, action) => {
 console.log('reducer userID', action.payload)           
         return {
             ...state,

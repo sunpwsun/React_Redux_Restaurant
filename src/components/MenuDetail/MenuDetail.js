@@ -1,31 +1,40 @@
 import React, { Component } from 'react'
-import { Card, Icon } from 'antd'
+import { Card, Icon, Badge, Tooltip } from 'antd'
 
 import './MenuDetail.css'
 
 
-
+ 
 class MenuDetail extends Component {
 
     render() {
-        
+       
         const { Meta } = Card
-        const { title, menuID, description, thumbUp, thumbDown, filename, onThumbUp, onThumbDown, onAddCart, index, } = this.props
+        const { title, menuID, description, content, thumbUp, thumbDown, filename, onThumbUp, onThumbDown, onAddCart, index, myThumb} = this.props
         const price = '$ ' + description + ' '
         return(
             <div>
                 <Card  className='menuDetail'
                     
-                    style={{ width:330, height:420 }}
-                    cover={<img className='menuImage' style={{height:220, width:328, borderRadius:8}} alt='menu' src={`../images/menu/${filename}`} />}
+                    style={{ width:330, height:423 }}
+                    cover={<Tooltip placement="bottomLeft" title={content}><img className='menuImage' style={{height:220, width:328, borderRadius:8}} alt='menu' src={`../images/menu/${filename}`} /></Tooltip>}
                     actions={[ 
                             <p className='thumb' onClick={ ()=>onThumbUp(menuID)} >
-                                <Icon type="like" theme="twoTone" /> &nbsp; {thumbUp} 
-                                <Icon type="like" theme="outlined" /><Icon type="like" theme="filled" />
+                                {   myThumb === 'UP' ?
+
+                                    (<div> 
+                                    <Badge dot='true'><Icon className='selectedThumb' type="like" theme="filled" /></Badge>&nbsp;{thumbUp}</div>)
+                                    :
+                                    (<div><Icon type="like" theme="twoTone" />&nbsp;{thumbUp}</div>)
+                                }
                             </p>, 
                             <p className='thumb' onClick={ ()=>onThumbDown(menuID)} >
-                                <Icon type="dislike" theme="twoTone" />  &nbsp; {thumbDown} 
-                                <Icon type="dislike" theme="outlined" /><Icon type="dislike" theme="filled" />
+                                {   myThumb === 'DOWN' ?
+                                    (<div> <Badge dot='true'><Icon  className='selectedThumb' type="dislike" theme="filled" /></Badge>&nbsp;{thumbDown}</div>)
+                                    :
+                                    (<div><Icon type="dislike" theme="twoTone" />&nbsp;{thumbDown}</div>)
+                                }
+                                
                             </p>, 
 
                             <p className='thumb' onClick={ ()=>onAddCart(index)} ><Icon type="plus-circle" theme="twoTone" />  &nbsp; Cart</p>

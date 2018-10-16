@@ -6,8 +6,15 @@ import { bindActionCreators } from 'redux'
 import {Link} from 'react-router-dom'
 import * as restaurantAction from  '../../store/modules/restaurant'
 import Title from '../Title/Title'
+import { GoogleLogin } from 'react-google-login'
+import {GoogleLoginClientID} from '../../key'
 
 class SignInForm extends Component {
+
+
+    state = {
+        google : false,
+    }
 
     // clicked login button 
     // while login processing, the login, guest user, google oauth buttons NOT activiated 
@@ -36,6 +43,30 @@ class SignInForm extends Component {
         })
     }
 
+    // login with google ID
+    handleGoogleLogin = async (e) => {
+
+        e.preventDefault()
+
+        this.setState({google:true})
+    }
+
+
+    success = (e) => {
+
+        const userID = e.profileObj.email
+console.log( '[Google Logn]', userID)        
+        this.props.RestaurantActions.login(userID)
+
+        //move to restaurant 
+        this.props.history.push('/restaurant')
+        
+    }
+
+    failure = (e) => {
+        console.log( 'FAILURE', e)
+    }
+
     // login as a guest
     handleGuestUser = async (e) => {
 
@@ -45,10 +76,9 @@ class SignInForm extends Component {
         const num = Math.floor(Math.random() * 9) + 1
         const userID = 'Guest' + num
 
-console.log('[A Guest user]', userID, this.props.userID)
+        this.props.RestaurantActions.login(userID)
 
-        this.props.RestaurantActions.loginGuest(userID)
-console.log('[B Guest user]', userID, this.props.userID)
+        // move to restaurant 
         this.props.history.push('/restaurant')
 
     }
@@ -62,47 +92,56 @@ console.log('[B Guest user]', userID, this.props.userID)
         return (
             <div>
                 <Title />
-                <div className='login-form'> 
+                    <div className='login-form'> 
 
-                 
-
-                    <Form onSubmit={this.handleSubmit} >
-                        <FormItem>
-                            {getFieldDecorator('username', {
-                                rules: [{ required: true, message: 'Please input your email!' }],
-                            })(
-                                <Input disabled='true' size='large'  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
-                            )}
-                        </FormItem>
-                        <FormItem>
-                            {getFieldDecorator('password', {
-                                rules: [{ required: true, message: 'Please input your Password!' }],
-                            })(
-                                <Input  disabled='true' size='large'  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                            )}
-                        </FormItem>
-                        <FormItem>
-
-                            <Button  disabled='true' size='large'  type="primary" htmlType="submit" className="login-form-button">
-                            <Icon type="login" theme="outlined" /> Log in
-                            </Button>
-            
-                        </FormItem>
-                        or <a href="/signup">Register now!</a>
-                        <hr />
-                    </Form>
-
-                    <div>
-                        <Button className="login-form-button" type="primary"  size='large' block  onClick={this.handleGuestUser}>
-                            <Icon type="eye" theme="outlined" />Guest User</Button>
                     
-                        <Button  disabled='true' className="login-form-button" size='large' block><Icon type="google" theme="outlined" />Sign In with Google</Button>
-                        
-                        
-                    </div>
 
+                        <Form onSubmit={this.handleSubmit} >
+                            <FormItem>
+                                {getFieldDecorator('username', {
+                                    rules: [{ required: true, message: 'Please input your email!' }],
+                                })(
+                                    <Input  size='large'  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
+                                )}
+                            </FormItem>
+                            <FormItem>
+                                {getFieldDecorator('password', {
+                                    rules: [{ required: true, message: 'Please input your Password!' }],
+                                })(
+                                    <Input   size='large'  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                                )}
+                            </FormItem>
+                            <FormItem>
 
-                </div>   
+                                <Button  size='large'  type="primary" htmlType="submit" className="login-form-button">
+                                <Icon type="login" theme="outlined" /> Log in
+                                </Button>
+                
+                            </FormItem>
+                            or <a href="/signup">Register now!</a>
+                            <hr />
+                        </Form>
+
+                        
+                            <Button 
+                                className="login-form-button" 
+                                 
+                                size='large' 
+                                block  
+                                onClick={this.handleGuestUser}
+                                >
+                                <Icon type="eye" theme="outlined" />Guest User
+                            </Button>
+                            <GoogleLogin
+                                clientId={GoogleLoginClientID}
+                                className="ant-btn login-form-button ant-btn-lg" 
+                                onSuccess={this.success}
+                                onFailure={this.failure}
+                                >
+                                <Icon type="google" theme="outlined" /> &nbsp;Sign In with Google
+                            </GoogleLogin>
+
+                    </div>   
             </div>
         )
     }

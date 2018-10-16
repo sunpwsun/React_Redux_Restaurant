@@ -205,7 +205,7 @@ console.log( '[new thumbDownUserID - DEL]', menuList[i].thumbDownUserID)
                     }
                 }
             }
-
+console.log('[description]', menus[i].description, '[content]', menus[i].price )
             listData.push({  
                 menuID      : menus[i].menuID,             
                 title       : menus[i].name,            
@@ -252,7 +252,9 @@ console.log( '[new thumbDownUserID - DEL]', menuList[i].thumbDownUserID)
 
         return( 
             <div>
-              
+                <div>
+                    {!this.props.userID && <Redirect to='/'/>}
+                </div>
 
 
                 <Title pathname={this.props.location.pathname} showDrawer={this.showDrawer} totalItems={totalItems} />
@@ -274,6 +276,7 @@ console.log( '[new thumbDownUserID - DEL]', menuList[i].thumbDownUserID)
                                             thumbDown  = {item.thumbDown}
                                             onThumbUp  = {()=>this.handleOnThumbUp(item.menuID, listData)}
                                             onThumbDown = {()=>this.handleOnThumbDown(item.menuID, listData)}
+                                            myThumb = {item.myThumb}
                                             filename = {item.filename}
                                             index = {item.index}
                                             onAddCart = {this.handleOnAddToCart}

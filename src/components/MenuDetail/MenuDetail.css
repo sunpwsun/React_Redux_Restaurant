@@ -1,10 +1,16 @@
-/* .menuDetail {
-    border : black 1px solid;
-} */
+.ant-card {
+    border-radius:8px;
+    box-shadow: 10px 10px 20px grey;
+} 
+
+
+.menuDetail:hover {
+    background-color : powderblue;
+} 
 
 .ant-card-actions {
     margin-bottom : 5px;
-    border : 1px solid blue
+   
 }
 
 .menuImage {
@@ -34,4 +40,8 @@
 .ant-card-meta-title  {
     font-size : 2em;
     color: rgb(75, 47, 47);
+}
+
+.selectedThumb {
+    font-size : 1.5em;
 }
