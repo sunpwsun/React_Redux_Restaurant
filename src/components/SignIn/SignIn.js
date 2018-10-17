@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Form, Icon, Input, Button } from 'antd'
+import { Form, Icon, Input, Button, Modal } from 'antd'
 import './SignIn.css'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -16,6 +16,30 @@ class SignInForm extends Component {
         google : false,
     }
 
+
+    successMsg() {
+        Modal.success({
+            title: 'Welcome',
+
+            content: (
+                <div>
+                <p>Hey '{this.props.userID}', Enjoy!!</p>
+                </div>
+            ),
+
+        })
+    }
+
+    errorMsg() {
+        Modal.error({
+            title: 'Error',
+            content: 'Please check your email or password',
+        })
+    }
+
+
+
+
     // clicked login button 
     // while login processing, the login, guest user, google oauth buttons NOT activiated 
     handleSubmit = (e) => {
@@ -26,13 +50,14 @@ class SignInForm extends Component {
 
             if (!err) {
                 this.props.RestaurantActions.localLogin( values ).then( (res)=>{
-                    console.log('[LOG IN FORM - res - ', res, 'userID-',this.props.userID)
+//console.log('[LOG IN FORM - res - ', res, 'userID-',this.props.userID)
 
                     if( res === 'success' ) {
+                        this.successMsg()
                         this.props.history.push('/restaurant')
                     }
                     else {
-
+                        this.errorMsg()
 
                     }
                 })
@@ -55,7 +80,7 @@ class SignInForm extends Component {
     success = (e) => {
 
         const userID = e.profileObj.email
-console.log( '[Google Logn]', userID)        
+//console.log( '[Google Logn]', userID)        
         this.props.RestaurantActions.login(userID)
 
         //move to restaurant 

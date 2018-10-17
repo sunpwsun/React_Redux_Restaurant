@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Form, Input, Modal, Select, Button, AutoComplete } from 'antd';
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {Link} from 'react-router-dom'
@@ -20,11 +20,56 @@ class SignUpForm extends Component {
         autoCompleteResult: [],
     }
 
+
+    success() {
+        Modal.success({
+            title: 'Congratulation',
+
+            content: (
+                <div>
+                <p>Successfully registered!</p>
+                <p>Move to Login page</p>
+                </div>
+            ),
+
+        })
+    }
+
+    error() {
+        Modal.error({
+            title: 'Error',
+            content: 'Please use another email address',
+        })
+    }
+      
+
+
+
+
+
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                console.log('Received values of form: ', values)
+
+                // pass the values to node.js
+
+                
+                this.props.RestaurantActions.signUp( {userID:values.email, password:values.password} ).then( (res) => {
+//console.log( 'SignUpForm - result', res)
+
+                    if( res === 'success' ) {
+                        this.success()
+
+                        this.props.history.push('/')
+                    }
+                    else{
+                        this.error()
+                    }
+
+                })
             }
         })
     }

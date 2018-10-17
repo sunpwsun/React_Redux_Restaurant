@@ -50,6 +50,10 @@ const LOGIN_GUEST_SNS = 'LOGIN_GUEST_SNS'
 const LOGOUT = 'LOGOUT'
 
 
+
+const SIGN_UP_PENDING = 'SIGN_UP_PENDING'
+
+
 export const logout = () => dispatch => {
 
     dispatch({
@@ -119,7 +123,7 @@ console.log('NEW REST A', restaurantID)
 }
  
 
-/*
+
 export const getPosition = () => dispatch => {
 
     dispatch( { type: GET_POSITION_PENDING } )
@@ -137,8 +141,8 @@ export const getPosition = () => dispatch => {
         getCityList()
 
 }
- */
-
+ 
+/*
 export const getPosition = () => dispatch => {
    
     dispatch( { type: GET_POSITION_PENDING } )
@@ -152,8 +156,9 @@ export const getPosition = () => dispatch => {
         
         getCityList()
     } )
-
 }
+*/
+
  
 export const setClosestCity = (cityID) => dispatch => {
 
@@ -357,11 +362,7 @@ export const localLogin = (idPwd) => async dispatch => {
 
     dispatch({ type: LOGIN_PENDING })
 
-
-
-
-    const res = await service.localLogin(idPwd)
-console.log('[reducer] result', res.data)    
+    const res = await service.localLogin(idPwd)  
 
     if( res.data === 'success' ) {
         // dispatch the logged user
@@ -377,9 +378,21 @@ console.log('[reducer] result', res.data)
         })
         return res.data
     }
-
-   
 }
+
+export const signUp = (values) => async dispatch => {
+
+    dispatch({
+        type: SIGN_UP_PENDING
+    })
+
+    const res = await service.signUp( values )
+//console.log('[reducer - result]', res)
+    return res.data
+
+}
+
+
 
 
 
@@ -465,7 +478,7 @@ console.log('reducer userID', action.payload)
 
     [CLEAR_CART] : (state, action) => {
      
-console.log('[CLEAR_CART')        
+//console.log('[CLEAR_CART')        
         return {
             ...state,
             menuCount : [],
@@ -475,7 +488,7 @@ console.log('[CLEAR_CART')
 
     [HANDLE_STRIPE_TOKEN] : (state, action) => {
 
-console.log('[STRIPE response]',action.payload)        
+       
         return {
             ...state,
             stripeResult : action.payload
@@ -483,6 +496,7 @@ console.log('[STRIPE response]',action.payload)
     },
 
     [CHANGE_CART]: (state, action) => {
+//console.log('[CHANGE_CART]',action.payload) 
         return {
             ...state,
             menuCount : action.payload
@@ -510,7 +524,7 @@ console.log('[STRIPE response]',action.payload)
         }
     },
     [SELECT_RESTAURANT] :  (state, action) => {
-console.log('NEW REST B', action.payload)        
+//console.log('NEW REST B', action.payload)        
         return {
             ...state,
             selectedRestaurantID : action.payload

@@ -49,8 +49,8 @@ class RestaurantReviews extends Component {
                     >
                         <List.Item.Meta                   
                             title={<a href={item.href}>{item.title}</a>}
-                            description={<p><Rate disabled value={item.description} />
-                                        <Divider type='vertical' /> {item.date} &nbsp;  {item.time} </p>}
+                            description={<div><Rate disabled value={item.description} />
+                                        <Divider type='vertical' /> {item.date} &nbsp;  {item.time} </div>}
                         />
                         {item.content}
                     </List.Item> 

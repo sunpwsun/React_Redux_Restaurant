@@ -165,6 +165,7 @@ console.log( '[new thumbDownUserID - DEL]', menuList[i].thumbDownUserID)
     handleOnAddToCart = (index) => {
 
         this.showDrawer()
+     
         this.handleIncreItem(index)
     }
 
@@ -182,7 +183,10 @@ console.log( '[new thumbDownUserID - DEL]', menuList[i].thumbDownUserID)
 
 
 
-
+        // sorts by menuID (ascending)
+        menus.sort(function(a, b) {
+            return a.menuID.$numberDecimal < b.menuID.$numberDecimal ? -1 : a.menuID.$numberDecimal > b.menuID.$numberDecimal ? 1 : 0 
+        })
 
 
         for( let i = 0 ; i < menus.length ; i++ ) {

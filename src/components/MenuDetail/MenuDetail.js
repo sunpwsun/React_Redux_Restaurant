@@ -16,28 +16,28 @@ class MenuDetail extends Component {
             <div>
                 <Card  className='menuDetail'
                     
-                    style={{ width:330, height:423 }}
+                    style={{ width:330, height:404 }}
                     cover={<Tooltip placement="bottomLeft" title={content}><img className='menuImage' style={{height:220, width:328, borderRadius:8}} alt='menu' src={`../images/menu/${filename}`} /></Tooltip>}
                     actions={[ 
-                            <p className='thumb' onClick={ ()=>onThumbUp(menuID)} >
+                            <div className='thumb' onClick={ ()=>onThumbUp(menuID)} >
                                 {   myThumb === 'UP' ?
 
                                     (<div> 
-                                    <Badge dot='true'><Icon className='selectedThumb' type="like" theme="filled" /></Badge>&nbsp;{thumbUp}</div>)
+                                    <Badge dot><Icon className='selectedThumb' type="like" theme="filled" /></Badge>&nbsp;{thumbUp}</div>)
                                     :
                                     (<div><Icon type="like" theme="twoTone" />&nbsp;{thumbUp}</div>)
                                 }
-                            </p>, 
-                            <p className='thumb' onClick={ ()=>onThumbDown(menuID)} >
+                            </div>, 
+                            <div className='thumb' onClick={ ()=>onThumbDown(menuID)} >
                                 {   myThumb === 'DOWN' ?
-                                    (<div> <Badge dot='true'><Icon  className='selectedThumb' type="dislike" theme="filled" /></Badge>&nbsp;{thumbDown}</div>)
+                                    (<div> <Badge dot><Icon  className='selectedThumb' type="dislike" theme="filled" /></Badge>&nbsp;{thumbDown}</div>)
                                     :
                                     (<div><Icon type="dislike" theme="twoTone" />&nbsp;{thumbDown}</div>)
                                 }
                                 
-                            </p>, 
+                            </div>, 
 
-                            <p className='thumb' onClick={ ()=>onAddCart(index)} ><Icon type="plus-circle" theme="twoTone" />  &nbsp; Cart</p>
+                            <div className='thumb' onClick={ ()=>onAddCart(index)} ><Icon type="plus-circle" theme="twoTone" />  &nbsp; Cart</div>
                     ]}
                 >
                 <Meta

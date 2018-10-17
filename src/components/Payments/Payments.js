@@ -113,28 +113,40 @@ console.log('FAILED')
                 <h1>{restaurnatName}</h1>
                     <br/>
                 <table><col width="350" /><col width="70" /><col width="80" />
-                    <tr><td className='table-header'>Menu</td><td className='table-header'>Qty</td><td className='table-header'>Price</td></tr>
+                    <thead>
+                        <tr>
+                            <th className='table-header'>Menu</th>
+                            <th className='table-header'>Qty</th>
+                            <th className='table-header'>Price</th>
+                        </tr>
+                    </thead>
                 </table>
                     <hr />
                 <table><col width="350" /><col width="70" /><col width="80" />
-                    {order}
+                    <tbody>
+                        {order}
+                    </tbody>    
                 </table>
                     <hr/>
                 <table><col width="350" /><col width="70" /><col width="80" />
-                    <tr >
-                        <td className='table-data-name'>Total</td>
-                        <td></td>
-                        <td className='table-data-price'>${totalPrice}</td>
-                    </tr>
-                    <tr>
-                        <td className='table-data-name'>HST(13%)</td>
-                        <td></td>
-                        <td className='table-data-price'>${hst}</td>
-                    </tr>
+                    <tbody>
+                        <tr >
+                            <td className='table-data-name'>Total</td>
+                            <td></td>
+                            <td className='table-data-price'>${totalPrice}</td>
+                        </tr>
+                        <tr>
+                            <td className='table-data-name'>HST(13%)</td>
+                            <td></td>
+                            <td className='table-data-price'>${hst}</td>
+                        </tr>
+                    </tbody>    
                 </table>
                     <hr />
-                    <table><col width="350" /><col width="70" /><col width="80" />
-                    <tr><td>Total Payable</td><td></td><td>${totalPayable}</td></tr>
+                <table><col width="350" /><col width="70" /><col width="80" />
+                    <tbody>
+                        <tr><td>Total Payable</td><td></td><td>${totalPayable}</td></tr>
+                    </tbody>
                 </table>
                     <br/>
                     <br/>

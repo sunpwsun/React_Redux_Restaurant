@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-//const url = 'http://18.219.68.114:3310'       // my EC2
-const url = 'http://localhost:3310'             // local
+const url = 'http://18.219.68.114:3310'       // my EC2
+//const url = 'http://localhost:3310'             // local
 
 
 // fetch all rests from cityID
@@ -78,27 +78,27 @@ export const updateRestaurantRate =  async ( restaurantID, cityID ) => {
 }
 
 export const thumbUp = async (menuID) => {
-    console.log('[thumbUp] - MenuID ' ,menuID)
+//console.log('[thumbUp] - MenuID ' ,menuID)
     const id = Number(menuID)
     return await axios.put(url + '/api/menu/thumbUp', { menuID : id} )
 }
 
 export const thumbDown = async (menuID) => {
-    console.log('[thumbDown] - MenuID ' ,menuID)
+//console.log('[thumbDown] - MenuID ' ,menuID)
     const id = Number(menuID)
     return await axios.put(url + '/api/menu/thumbDown', { menuID : id} )
 }
 
 
 export const updateThumbUpList = async (menuID, list) => {
-    console.log('[ axios thumbUpList] - MenuID ' ,menuID, list)
+//console.log('[ axios thumbUpList] - MenuID ' ,menuID, list)
 
     const id = menuID.$numberDecimal
     return await axios.put( url + '/api/menu/thumbUpList/', { menuID : id, thumbUpUserID : list})
 }
 
 export const updateThumbDownList = async (menuID, list) => {
-    console.log('[ axios thumbDownList] - MenuID ' ,menuID, list)
+//console.log('[ axios thumbDownList] - MenuID ' ,menuID, list)
 
     const id = menuID.$numberDecimal
     return await axios.put( url + '/api/menu/thumbDownList/', { menuID : id, thumbDownUserID : list})
@@ -106,7 +106,7 @@ export const updateThumbDownList = async (menuID, list) => {
 
 
 export const handleStripeToken = async (token) => {
-console.log( '[service] - /api/stripe', token)
+//console.log( '[service] - /api/stripe', token)
     return await axios.post(url + '/api/stripe', token)
 }
 
@@ -132,9 +132,18 @@ export const getOrderHistory = async (userID) => {
 
 
 export const localLogin = async (idPwd) => {
-    console.log('[axios] local login', idPwd) 
+//console.log('[axios] local login', idPwd) 
 
     const res = await axios.post( url + '/auth/login', idPwd )//.then( (res)=>console.log('[axois result - ]', res))
 
+    return res
+}
+
+
+
+export const signUp = async (values) => {
+
+    const res = await axios.post( url + '/signup', values )//.then( (res)=>console.log('[axois result - ]', res))
+    
     return res
 }
