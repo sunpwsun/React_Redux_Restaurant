@@ -1,0 +1,32 @@
+.todayTitle {
+    text-align: center;
+    border-bottom: solid 3px #777777;
+    padding-bottom: 10px;
+}
+
+.todayChars{
+    text-align: center;
+    background-color: lightskyblue;
+    border-radius: 15px;
+    
+}
+
+.todayChartContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.todayChartItem {
+    flex-grow: 1;
+    width: 500px;
+
+    margin-top: 20px;
+    margin-right: 20px;
+    padding-bottom: 50px;
+    border: solid skyblue 2px;
+    border-radius: 10px;
+}
+
+.tableToggle {
+    margin-top: 50px;
+}

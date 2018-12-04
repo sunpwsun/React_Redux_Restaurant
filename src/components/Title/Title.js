@@ -118,9 +118,17 @@ console.log('[payment history] - error', payments)
                     </div>
                 break
 
+            // other cases, /, /signup, /stat
             default :
-                navIcons = <div className='headerItem'> &nbsp; </div>
+                //navIcons = <div className='headerItem'> &nbsp; </div>
+                navIcons = 
+                    <div className='headerItem'>
+                        <Tooltip title='Sales Statistics'>
+                            <Link to='/stat'><Icon className='salesStat' type="bar-chart" theme="outlined" /> &nbsp;</Link>
+                        </Tooltip>
 
+                    
+                    </div>
                 break
         }
 

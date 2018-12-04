@@ -1,0 +1,23 @@
+.side {
+    height: 100%;
+    width: 258px;
+    /* border-right-color: black;
+    border-right-style: solid; */
+}
+
+
+.center {
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+
+
+
+#components-layout-demo-top-side-2  {
+    width: 120px;
+    height: 31px;
+    background: #ffffff;  
+    margin: 16px 28px 16px 0;
+    float: left;
+  }

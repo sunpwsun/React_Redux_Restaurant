@@ -6,6 +6,7 @@ import SignIn from './SignIn/SignIn'
 import SignUp from './SignUp/SignUp'
 import AppContainer from '../containers/AppContainer'
 import MenuListContainer from '../containers/MenuListContainer'
+import StatContainer from '../containers/StatContainer'
 import * as restaurantAction from '../store/modules/restaurant'
 
 
@@ -29,6 +30,7 @@ class App extends Component {
                 <Route       path = '/signup'           component = {SignUp} />
                 <Route       path = '/restaurant'       component = {AppContainer} />
                 <Route       path = '/menu'             component = {MenuListContainer} />
+                <Route       path = '/stat'             component = {StatContainer} />
               
             </div>
         )

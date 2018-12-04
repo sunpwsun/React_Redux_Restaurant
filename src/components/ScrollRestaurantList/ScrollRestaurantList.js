@@ -135,7 +135,7 @@ console.log('[scroll rest list]', e)
                             <div>
 
                                 <span>
-                                <Link to='/menu' ><img width='270' alt='restaurant_image' src={`../images/restaurants/${item.restaurantID}.jpeg` } 
+                                <Link to='/menu' ><img className='restImage' width='270' alt='restaurant_image' src={`../images/restaurants/${item.restaurantID}.jpeg` } 
                                                         onClick={()=>this.handleChangeRestaurant(item.restaurantID)} />
                                 </Link>
 

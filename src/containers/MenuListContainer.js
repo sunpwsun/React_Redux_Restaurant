@@ -240,6 +240,7 @@ console.log('[description]', menus[i].description, '[content]', menus[i].price )
                 totalItems += Number(this.props.menuCount[i])
                 cart.push({
                     key : j,
+                    menuID: menus[i].menuID, 
                     name : menus[i].name,
                     items : this.props.menuCount[i],
                     price : price,
@@ -256,7 +257,7 @@ console.log('[description]', menus[i].description, '[content]', menus[i].price )
 
         return( 
             <div>
-                <div>
+                <div> 
                     {!this.props.userID && <Redirect to='/'/>}
                 </div>
 
