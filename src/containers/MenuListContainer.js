@@ -185,7 +185,7 @@ console.log( '[new thumbDownUserID - DEL]', menuList[i].thumbDownUserID)
 
         // sorts by menuID (ascending)
         menus.sort(function(a, b) {
-            return a.menuID.$numberDecimal < b.menuID.$numberDecimal ? -1 : a.menuID.$numberDecimal > b.menuID.$numberDecimal ? 1 : 0 
+            return a.menuID < b.menuID ? -1 : a.menuID > b.menuID ? 1 : 0 
         })
 
 

@@ -1,39 +1,25 @@
-.title {
-    background-color:lightsalmon;
-    color: brown;
-    font-size: 4rem;
-    
-    text-align: center;
-    font-weight: 600;
-    
-    border-radius: 3px;
-}
 
-.Location {
-    background-color:white;
-    color: black;
-    font-size: 1.3rem;
-
-    text-align: center;
-    
-    border: solid black 1px;
-    border-radius: 3px;
-}
 
 .headerContainer {
     display: flex;
     flex-direction: row;
+
+
+    box-shadow: 10px 10px 20px grey;
 }
 
 .headerItem {
     flex-grow: 1;
 
-    background-color:powderblue;
-    color: rgb(20, 98, 161);
+    /* background-color:powderblue; */
+    /* color: rgb(20, 98, 161); */
+    color: black;
     font-size: 1.5rem;
     
     text-align: center;
     font-weight: 400;
+
+    border-bottom: powderblue 3px solid; 
 
 }
 

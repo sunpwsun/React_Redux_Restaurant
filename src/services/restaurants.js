@@ -93,14 +93,14 @@ export const thumbDown = async (menuID) => {
 export const updateThumbUpList = async (menuID, list) => {
 //console.log('[ axios thumbUpList] - MenuID ' ,menuID, list)
 
-    const id = menuID.$numberDecimal
+    const id = menuID
     return await axios.put( url + '/api/menu/thumbUpList/', { menuID : id, thumbUpUserID : list})
 }
 
 export const updateThumbDownList = async (menuID, list) => {
 //console.log('[ axios thumbDownList] - MenuID ' ,menuID, list)
 
-    const id = menuID.$numberDecimal
+    const id = menuID
     return await axios.put( url + '/api/menu/thumbDownList/', { menuID : id, thumbDownUserID : list})
 }
 

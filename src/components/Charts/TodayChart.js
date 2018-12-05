@@ -1,43 +1,36 @@
 import React, {Component, Fragment} from 'react'
 import './TodayChart.css'
-import { Switch } from 'antd'
+import { Switch, Spin } from 'antd'
 import { getToday, getTomorrow, getRandomColor } from  '../../utils/utils'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import {Doughnut} from 'react-chartjs-2'
-
+import TodayTable from '../TodayTable/TodayTable'
 
 const GET_PAYMENTS = gql`
-  query Payments($date1: String!, $date2: String!, $id: String!) {
-    payments(date1: $date1, date2: $date2, id: $id) {
-        paymentID
-        userID
-        email
-        restaurantID
-        restaurantName
-        cart {
-            menuID
-            name 
-            items
-            price
+    query Payments($date1: String!, $date2: String!, $id: String!) {
+        payments(date1: $date1, date2: $date2, id: $id) {
+            paymentID
+            userID
+            email
+            restaurantID
+            restaurantName
+            cart {
+                menuID
+                name 
+                items
+                price
+            }
+            totalItems
+            totalPrice
+            dateTime
         }
-        totalItems
-        totalPrice
-        dateTime
     }
-}
 `
-
-function onChange(checked) {
-    console.log(`switch to ${checked}`);
-  }
 
 
 class TodayChart extends Component {
-
-    
-
 
     makeGraphData = (payments) => {
 
@@ -123,8 +116,8 @@ console.log(salesData, qtyData)
             
 
                 {({ data, loading, error }) => {
- //                   if (loading) return <Loading />;
-                    if (loading) return <p>Loading...</p>
+                    if (loading) return <div><Spin className='loading' tip='Loading...' size='large' /></div>
+                    //if (loading) return <p>Loading...</p>
                     if (error) return <p>ERROR</p>
 
     console.log(data.payments)
@@ -147,7 +140,8 @@ console.log(salesData, qtyData)
                                     
                                 </div>
                                 <div className='tableToggle'>
-                                    <Switch defaultChecked onChange={onChange} /> <span> Shows figures on table</span>
+                                    
+                                    <TodayTable salesData={graphData.salesData} qtyData={graphData.qtyData} />
                                 </div>
                             </div>
                  

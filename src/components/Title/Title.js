@@ -45,7 +45,7 @@ class Title extends Component {
     }
 
     showOrderHistory = async () => {
-
+        this.showOrderHistoryModal()
         //const payments = await service.getOrderHistory('test_user1')
         const payments = await service.getOrderHistory(this.props.userID)
 
@@ -54,6 +54,7 @@ class Title extends Component {
 
             if( payments.data.length === 0 ) { // no data
 console.log('[payment history] - no data' )
+this.hideOrderHistoryModal()
                 this.showNoDataMessage()
             }
             else {  
@@ -62,12 +63,13 @@ console.log('[payment history]', payments.data )
                     ...this,
                     orders: payments.data
                 })
-                this.showOrderHistoryModal()
+                
             }
         }
         else {                                  // error
 console.log('[payment history] - error', payments)
         }
+
     }
 
 
@@ -97,7 +99,7 @@ console.log('[payment history] - error', payments)
                         <Tooltip title='Log out'>
                             <Link to='/'><span><Icon className='iconLogout' type="logout" theme="outlined" onClick={this.logout} /></span></Link>
                         </Tooltip>
-                    </div>
+                    </div> 
                    
                 break
             case '/restaurant' :

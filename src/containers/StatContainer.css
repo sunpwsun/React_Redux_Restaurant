@@ -1,8 +1,11 @@
 .side {
-    height: 100%;
-    width: 258px;
+    /* height: 100%;
+    width: 258px; */
     /* border-right-color: black;
     border-right-style: solid; */
+    margin-left: 5px;
+    /* background-color: '#fff';
+    width:270px; */
 }
 
 
@@ -20,4 +23,15 @@
     background: #ffffff;  
     margin: 16px 28px 16px 0;
     float: left;
-  }
+}
+
+.sideLabel {
+    width: 255px;
+    text-align: center;
+    color:white;
+    background-color: #1790ff;
+    border: solid, lightblue, 2px;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}

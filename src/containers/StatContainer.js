@@ -1,5 +1,10 @@
+/// https://www.apollographql.com/docs/react/essentials/get-started.html 참조
+
+
+
+
 import React, {Component} from 'react'
-import { Layout } from 'antd'
+import { Layout, Divider } from 'antd'
 import './StatContainer.css'
 
 
@@ -19,12 +24,25 @@ import MonthChart from '../components/Charts/MonthChart'
 
 
 const { Header, Sider, Content } = Layout
-
+ 
 
 // Set up our apollo-client to point at the server we created
 // this can be local or a remote endpoint
 const link = createHttpLink({ uri: 'http://localhost:4000/graphql' })
-const cache = new InMemoryCache()
+
+
+// https://www.apollographql.com/docs/react/advanced/caching.html#dataIdFromObject
+// In my app,
+// Query GET_DAILY_SALES on MonthChart.js returns array that duplicates first result to every node
+// 0: {_id: {…}, totalAmount: 260.4, count: 15, __typename: "DailySales"}
+// 1: {_id: {…}, totalAmount: 260.4, count: 15, __typename: "DailySales"}
+// 2: {_id: {…}, totalAmount: 260.4, count: 15, __typename: "DailySales"}
+// 3: {_id: {…}, totalAmount: 260.4, count: 15, __typename: "DailySales"}
+// 4: ...
+// It was because '_id' was used at the query.   __typename
+// Solved by replacing 'addTypename' to false
+const cache = new InMemoryCache( {addTypename:false} )
+
 const client = new ApolloClient({ cache, link })
 
 
@@ -78,8 +96,11 @@ class StatContainer extends Component {
                 <StatHeader />
                 <Layout>
                     <Layout>
-                        <Sider width={270} style={{ background: '#fff' }} >
+                        <Sider className='side'  width={260} style={{ background: '#fff' }} >
+                            <h3 className='sideLabel'>Choose Restaurant</h3>
                             <RestaurantSelect changeRestaurant={this.handleChangeRestaurant} />
+                            <Divider />
+                            <h3 className='sideLabel'>Query Option</h3>
                             <OptionMenu changeOption={this.handleChangeOption} />
                         </Sider>
                         <Layout>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Form, Icon, Input, Button, Modal } from 'antd'
+import { Form, Icon, Input, Button, Modal, Popover } from 'antd'
 import './SignIn.css'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -8,6 +8,14 @@ import * as restaurantAction from  '../../store/modules/restaurant'
 import Title from '../Title/Title'
 import { GoogleLogin } from 'react-google-login'
 import {GoogleLoginClientID} from '../../key'
+
+
+const popover = (
+    <div>
+        <p>This shows sales statistics of each restaurant</p>
+    </div>
+)
+
 
 class SignInForm extends Component {
 
@@ -108,8 +116,6 @@ class SignInForm extends Component {
 
     }
 
-
-
     render() {
         const FormItem = Form.Item
         const { getFieldDecorator } = this.props.form
@@ -118,10 +124,12 @@ class SignInForm extends Component {
             <div>
                 <Title />
                     <div className='login-form'> 
-
-                    
-
+                        <Popover placement="topLeft" content={popover}>
+                            <a href='/stat'><div className='statBtn'><span><Icon type="bar-chart" size='large'/> &nbsp; Sales Statistics</span></div></a>
+                        </Popover>
                         <Form onSubmit={this.handleSubmit} >
+                            
+                            <hr className='border'/>
                             <FormItem>
                                 {getFieldDecorator('username', {
                                     rules: [{ required: true, message: 'Please input your email!' }],
@@ -149,7 +157,7 @@ class SignInForm extends Component {
 
                         
                             <Button 
-                                className="login-form-button" 
+                                className="login-form-button btnGap" 
                                  
                                 size='large' 
                                 block  

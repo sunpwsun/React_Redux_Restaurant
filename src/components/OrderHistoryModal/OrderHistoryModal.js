@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react'
-import { Modal, Table } from 'antd'
+import { Modal, Table, Spin } from 'antd'
 
 
 class OrderHistoryModal extends Component {
@@ -51,18 +51,20 @@ class OrderHistoryModal extends Component {
                     width={800}
                     footer={[]}
                 >
-
-                    <Table
-                        columns={columns}
-                        
-                        dataSource={data}
-                        onRow={(record) => {
-                            return {
-                              onClick: () => {console.log('record:',record)}
-                            }
-                          }}
-                    />
-
+                    { orders.length > 0 ?
+                        <Table
+                            columns={columns}
+                            
+                            dataSource={data}
+                            onRow={(record) => {
+                                return {
+                                onClick: () => {console.log('record:',record)}
+                                }
+                            }}
+                        />
+                        :
+                        <div><Spin className='loading' tip='Loading...' size='large' /></div>
+                    }
 
                 </Modal>
             </div>

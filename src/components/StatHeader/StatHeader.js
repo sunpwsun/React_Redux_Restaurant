@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './StatHeader.css'
+//import './StatHeader.css'
 
 
 class StatHeader extends Component {

@@ -22,7 +22,9 @@ class RestSelect extends Component {
                     <Option value="100100110003">El Patio</Option>
                 </OptGroup>
                 <OptGroup label="Missisauga">
+                    <Option value="100100210002">REDS</Option>
                     <Option value="100100210009">Breakfast ING</Option>
+                   
                 </OptGroup>
             </Select>
         )
