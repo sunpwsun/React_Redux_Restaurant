@@ -18,7 +18,7 @@ class OptionMenu extends Component {
                     >
                     <Menu.Item key="1">
                         <Icon type="pie-chart" />
-                        <span>Today</span>
+                        <span>Today (Daily)</span>
                     </Menu.Item>
                     <Menu.Item key="2">
                         <Icon type="line-chart" />

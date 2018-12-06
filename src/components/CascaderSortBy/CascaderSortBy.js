@@ -33,6 +33,7 @@ class CascaderSortBy extends Component {
 
             <Cascader 
                 options={sortOpt} 
+                allowClear={false}
                 defaultValue={defaultVal}
                 onChange={this.onChangeSort} 
                 placeholder="Please select" 

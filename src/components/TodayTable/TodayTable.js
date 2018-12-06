@@ -80,7 +80,7 @@ console.log( 'qtyData', qtyData)
             <div>
                 <Switch className='switch' checked={this.state.switch} onChange={this.onSwitchChange} /> <span> Shows figures on table</span>
                 {this.state.switch &&
-                    <Table columns={columns} dataSource={tableData} onChange={this.handleSortChange} />
+                    <Table className='todayTable' columns={columns} dataSource={tableData} onChange={this.handleSortChange} />
                 }
             </div>
         )

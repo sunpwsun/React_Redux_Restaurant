@@ -4,22 +4,24 @@
     display: flex;
     flex-direction: row;
 
-
-    box-shadow: 10px 10px 20px grey;
+    margin-bottom: 10px;
+    box-shadow: 5px 5px 10px lightgray;
 }
 
 .headerItem {
     flex-grow: 1;
 
-    /* background-color:powderblue; */
-    /* color: rgb(20, 98, 161); */
-    color: black;
+    /* color: #333; */
     font-size: 1.5rem;
     
     text-align: center;
-    font-weight: 400;
+    font-weight: 600;
 
     border-bottom: powderblue 3px solid; 
+
+
+    background-color: #1790ff;
+    color:#fff;
 
 }
 
@@ -38,7 +40,8 @@
   }
 
 
-.iconCart, .iconOrderHistory, .iconUser, .iconLogout {
+.iconCart, .iconOrderHistory, .iconUser, .iconLogout, .salesStat {
+    color: white;
     font-size: 1.5rem;
     cursor:pointer;
 }
@@ -46,5 +49,6 @@
 .salesStat {
     font-size: 3rem;
     cursor:pointer;
+    padding-bottom:10px;
 }
 

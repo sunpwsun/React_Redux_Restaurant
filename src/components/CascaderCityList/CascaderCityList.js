@@ -66,6 +66,7 @@ class CascaderCityList extends Component {
 
             <Cascader 
                 options={options} 
+                allowClear={false}
                 defaultValue={defaultVal}
                 onChange={this.handleChangeCity} 
                 placeholder='Please select'

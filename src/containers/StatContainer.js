@@ -103,12 +103,15 @@ class StatContainer extends Component {
                             <h3 className='sideLabel'>Query Option</h3>
                             <OptionMenu changeOption={this.handleChangeOption} />
                         </Sider>
+                       
                         <Layout>
-                            <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }} >
-                                <ApolloProvider client={client}>
-                                    {chart}
-                                </ApolloProvider>
-                            </Content>
+                            
+                                <Content  style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }} >
+                                    <ApolloProvider client={client}>
+                                        {chart}
+                                    </ApolloProvider>
+                                </Content>
+                            
                         </Layout>
                     </Layout>
                 </Layout>

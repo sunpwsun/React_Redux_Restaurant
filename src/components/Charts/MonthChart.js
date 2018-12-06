@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import './MonthChart.css'
 import { Switch, Spin } from 'antd'
+import MonthTable from '../MonthTable/MonthTable'
 import { getToday, getTomorrow, getRandomColor, getDateFromToday } from  '../../utils/utils'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -25,14 +26,10 @@ const GET_DAILY_SALES = gql`
                 menuID
             }
             totalAmount
-            count
+            totalQty
         }
     }
 `
-
-function onChange(checked) {
-    console.log(`switch to ${checked}`);
-}
 
 
 
@@ -80,9 +77,12 @@ class MonthChart extends Component {
             dataset.label = menu[ i ].name
             dataset.menuID = menu[ i ].menuID 
             dataset.data = []
+            dataset.dataQty = []
 
-            for( let j = 0 ; j < labels.length ; j++ ) 
+            for( let j = 0 ; j < labels.length ; j++ ) {
                 dataset.data[ j ] = 0
+                dataset.dataQty[ j ] = 0
+            }
 
             datasets.push( dataset )
         }
@@ -103,6 +103,8 @@ console.log("datasets ", datasets)
 
 //console.log('numDataset ', e._id.menuID, numDataset, numData) 
             datasets[ numDataset ].data[ numData ] = e.totalAmount.toFixed(1)
+            datasets[ numDataset ].dataQty[ numData ] = e.totalQty
+            
         
         })
 console.log("datasets ", datasets) 
@@ -207,13 +209,14 @@ console.log('menu A- ', menus)
                         return (
                         
                                 <div>
-                                    <h1 className='todayTitle'>Last 30 Days Salse Figures</h1>
-                                    <div className='lineChart'>
-                                        
+                                    <div className='monthTitle'>Last 30 Days Salse Figures</div>
+                                    <div className='lineChart'>                                       
                                             <Line  data={lineGraphData} options={opt} />               
                                     </div>
+
                                     <div className='tableToggle'>
-                                        <Switch defaultChecked onChange={onChange} /> <span> Shows figures on table</span>
+                                
+                                        <MonthTable labels={graphData.labels} datasets={graphData.datasets} menus={menus}/>
                                     </div>
                                 </div>
                     

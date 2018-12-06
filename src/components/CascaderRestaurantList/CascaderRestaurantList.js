@@ -39,6 +39,7 @@ class CascaderRestaurantList extends Component {
 
             <Cascader className='CascaderRestaurantList'
                 options={options} 
+                allowClear={false}
                 defaultValue={defaultVal}
                 onChange={this.handleChangeRestaurant} 
                 placeholder='Please select'

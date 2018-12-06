@@ -109,6 +109,7 @@ console.log('[payment history] - error', payments)
                         <Tooltip title='View your order history'>
                             <Icon className='iconOrderHistory' onClick={this.showOrderHistory} type="ordered-list" theme="outlined" /> &nbsp;
                         </Tooltip>
+
                         <Tooltip title={this.props.userID}>
                             <span><Icon className='iconUser' type="user" theme="outlined" /> </span>
                             &nbsp; 
@@ -128,8 +129,10 @@ console.log('[payment history] - error', payments)
                         <Tooltip title='Sales Statistics'>
                             <Link to='/stat'><Icon className='salesStat' type="bar-chart" theme="outlined" /> &nbsp;</Link>
                         </Tooltip>
-
-                    
+                        &nbsp; &nbsp; 
+                        <Tooltip title='View source code at Github'>
+                            <a href='https://github.com/sunpwsun/React_Redux_Restaurant'><Icon className='salesStat' type="github" /></a>
+                        </Tooltip>
                     </div>
                 break
         }

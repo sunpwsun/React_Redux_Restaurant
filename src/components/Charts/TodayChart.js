@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import './TodayChart.css'
-import { Switch, Spin } from 'antd'
+import { DatePicker, Spin } from 'antd'
+import moment from 'moment'
 import { getToday, getTomorrow, getRandomColor } from  '../../utils/utils'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -9,8 +10,8 @@ import {Doughnut} from 'react-chartjs-2'
 import TodayTable from '../TodayTable/TodayTable'
 
 const GET_PAYMENTS = gql`
-    query Payments($date1: String!, $date2: String!, $id: String!) {
-        payments(date1: $date1, date2: $date2, id: $id) {
+    query PaymentsDate($date: String!, $id: String!) {
+        paymentsDate(date: $date, id: $id) {
             paymentID
             userID
             email
@@ -25,19 +26,36 @@ const GET_PAYMENTS = gql`
             totalItems
             totalPrice
             dateTime
+            date
+            time
         }
     }
 `
 
 
+
+
+
+function disabledDate(current) {
+    // Can not select days before today and today
+    return current > moment().endOf('day');
+  }
+
+
+
 class TodayChart extends Component {
+
+
+    state = {
+        date: getToday()
+    }
+
 
     makeGraphData = (payments) => {
 
         let totalSales = {}
         let totalItems = {}
         let menuNames = []
-
 
 
         // performance of the for-loop is much better than forEach
@@ -57,15 +75,14 @@ class TodayChart extends Component {
                     totalSales[ menu.name ] = menu.price
                     totalItems[ menu.name ] = menu.items
                     menuNames.push( menu.name )
-                }
-//     console.log(i, j, totalSales, totalItems, menuNames)           
+                }   
             }
         }
 
         
         let salesLabels = []
         let salesDatasets = { data: [], backgroundColor: [] }
-        let salesOption = { title: {display: true, text: ['Total Sales'], fontStyle: 'bold', fontSize: 40}, legend: {
+        let salesOption = { title: {display: true, text: ['Total Sales'], fontStyle: 'bold', fontSize: 40, fontColor: '#06f'}, legend: {
             display: true,
             position: "top",
             labels: {
@@ -75,7 +92,7 @@ class TodayChart extends Component {
         }}
         let qtyLabels = []
         let qtyDatasets = { data: [], backgroundColor: [] }
-        let qtyOption = { title: {display: true, text: ['Number of Sold Dishes'], fontStyle: 'bold', fontSize: 40}}
+        let qtyOption = { title: {display: true, text: ['Number of Sold Dishes'], fontStyle: 'bold', fontSize: 40, fontColor: '#06f'}}
         let totalSalesToday = 0
         let totalQtyToday = 0
 
@@ -103,49 +120,69 @@ console.log(salesData, qtyData)
         return { salesData, qtyData }
     }
 
+    onDateChange = (e) => {
+        console.log('new date:', e._d.toISOString().substring(0, 10))
+
+        this.setState({
+            date: e._d.toISOString().substring(0, 10)
+        })
+    }
 
 
     render() {
 
         const today = getToday()
         const tomorrow = getTomorrow()
-
+console.log( 'today ', today, 'id', this.props.id)
         return( 
 
-            <Query query={GET_PAYMENTS} variables={  { date1: today, date2: tomorrow, id: this.props.id } } >
+            <Query query={GET_PAYMENTS} variables={  { date: this.state.date, id: this.props.id } } >
             
 
                 {({ data, loading, error }) => {
                     if (loading) return <div><Spin className='loading' tip='Loading...' size='large' /></div>
-                    //if (loading) return <p>Loading...</p>
                     if (error) return <p>ERROR</p>
 
-    console.log(data.payments)
+    console.log('data', data.paymentsDate)
 
-                    const graphData = this.makeGraphData(data.payments)
+                    const graphData = this.makeGraphData(data.paymentsDate)
 
                     return (
                      
-                            <div>
-                                <h1 className='todayTitle'>Today Salse Figures ({today})</h1>
-                                <div className='todayChartContainer'>
-                                    <div className='todayChartItem'>
-                                        {/* <h1 className='todayChars'>Total Revenue</h1> */}
-                                        <Doughnut data={graphData.salesData} options={graphData.salesData.options} />
+                        <div className='chartBody'>
+                            <div className='todayTitle'>
+                                <div className='todayTitleContainer'>
+                                <div className='todayTitleItem'></div>
+                                    <div className='todayTitleItem'>Daily Sales Figures ({this.state.date})</div>
+                                   
+                                    <div className='todayTitleItem'><DatePicker  defaultValue={moment(this.state.date, 'YYYY-MM-DD')} 
+                                                    format={'YYYY-MM-DD'} 
+                                                    size={'large'} 
+                                                    allowClear={false}
+                                                    onChange={this.onDateChange}
+                                                    disabledDate={disabledDate}
+                                                    />
                                     </div>
-                                    <div className='todayChartItem'>
-                                        {/* <h1 className='todayChars'>Totoal Number of Dishes</h1> */}
-                                        <Doughnut data={graphData.qtyData} options={graphData.qtyData.options}/>
-                                    </div>
-                                    
-                                </div>
-                                <div className='tableToggle'>
-                                    
-                                    <TodayTable salesData={graphData.salesData} qtyData={graphData.qtyData} />
-                                </div>
+                                </div>    
                             </div>
+                                <div className='todayChartContainer'>
+                                <div className='todayChartItem'>
+                                    
+                                    <Doughnut data={graphData.salesData} options={graphData.salesData.options} />
+                                </div>
+                                <div className='todayChartItem'>
+                                    
+                                    <Doughnut data={graphData.qtyData} options={graphData.qtyData.options}/>
+                                </div>
+                                
+                            </div>
+                            <div className='tableToggle'>
+                                
+                                <TodayTable salesData={graphData.salesData} qtyData={graphData.qtyData} />
+                            </div>
+                        </div>
                  
-                    );
+                    )
                 }}
             </Query>
         )
