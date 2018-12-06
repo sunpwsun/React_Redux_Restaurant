@@ -137,38 +137,37 @@ console.log("datasets ", datasets)
                     {({ data, loading, error }) => {
                         if (loading) return <div><Spin className='loading' tip='Loading...' size='large' /></div>
                         if (error) return <p>ERROR</p>
-    console.log("dailySalesPeriod - ", data.dailySalesPeriod)
-console.log('menu A- ', menus)
+//     console.log("dailySalesPeriod - ", data.dailySalesPeriod)
+// console.log('menu A- ', menus)
                         
-                            const graphData = this.makeGraphData( data.dailySalesPeriod, menus )
+                        const graphData = this.makeGraphData( data.dailySalesPeriod, menus )
 
-                            const lineGraphData = {
-                                labels: graphData.labels,
-                                datasets: graphData.datasets
-                            }
+                        const lineGraphData = {
+                            labels: graphData.labels,
+                            datasets: graphData.datasets
+                        }
 
-                            const opt = {
-                                scales: {
-                                    yAxes: [{
-                                        stacked: true
-                                    }]
-                                }
+                        const opt = {
+                            scales: {
+                                yAxes: [{
+                                    stacked: true
+                                }]
                             }
+                        }
                         return (
                         
-                                <div>
-                                    <div className='monthTitle'>Last 30 Days Salse Figures</div>
-                                    <div className='lineChart'>                                       
-                                            <Line  data={lineGraphData} options={opt} />               
-                                    </div>
-
-                                    <div className='tableToggle'>
-                                
-                                        <MonthTable labels={graphData.labels} datasets={graphData.datasets} menus={menus}/>
-                                    </div>
+                            <div>
+                                <div className='monthTitle'>Last 30 Days Salse Figures</div>
+                                <div className='lineChart'>                                       
+                                        <Line  data={lineGraphData} options={opt} />               
                                 </div>
-                    
-                        );
+
+                                <div className='tableToggle'>
+                            
+                                    <MonthTable labels={graphData.labels} datasets={graphData.datasets} menus={menus}/>
+                                </div>
+                            </div>
+                        )
                     }}
                 </Query>
             </Fragment>
