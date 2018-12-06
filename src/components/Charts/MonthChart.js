@@ -147,58 +147,6 @@ console.log('menu A- ', menus)
                                 datasets: graphData.datasets
                             }
 
-                            const data2 = {
-                                        labels: ['2018-07-11', '2018-07-12', '2018-07-13', '2018-07-14', '2018-07-15', '2018-07-16',  '2018-07-17', '2018-07-18', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11',  '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11', '2018-07-11' ],
-                                        datasets: [
-                                        {
-                                            label: 'My 1st dataset',
-                                            fill: false,
-                                            lineTension: 0.1,
-                                            backgroundColor: 'rgba(75,192,192,0.4)',
-                                            borderColor: 'rgba(0,192,192,1)',
-                                            borderCapStyle: 'butt',
-                                            borderDash: [],
-                                            borderDashOffset: 0.0,
-                                            borderJoinStyle: 'miter',
-                                            pointBorderColor: 'rgba(75,192,192,1)',
-                                            pointBackgroundColor: '#fff',
-                                            pointBorderWidth: 1,
-                                            pointHoverRadius: 5,
-                                            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-                                            pointHoverBorderColor: 'rgba(220,220,220,1)',
-                                            pointHoverBorderWidth: 2,
-                                            pointRadius: 1,
-                                            pointHitRadius: 10,
-            data: [25, 5, 8, 11, 15, 25, 5, 8, 11, 15, 12, 25, 5, 8, 11, 15, 12, 25, 5, 8, 11, 15, 12, 25, 5, 8, 11, 15, 12, 21]
-            //data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        },
-                                    
-                                        {
-                                            label: 'My 2nd dataset',
-                                            fill: false,
-                                            lineTension: 0.1,
-                                            backgroundColor: 'rgba(75,192,192,0.4)',
-                                            borderColor: 'rgba(255,192,192,1)',
-                                            borderCapStyle: 'butt',
-                                            borderDash: [],
-                                            borderDashOffset: 0.0,
-                                            borderJoinStyle: 'miter',
-                                            pointBorderColor: 'rgba(75,192,192,1)',
-                                            pointBackgroundColor: '#fff',
-                                            pointBorderWidth: 1,
-                                            pointHoverRadius: 5,
-                                            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-                                            pointHoverBorderColor: 'rgba(220,220,220,1)',
-                                            pointHoverBorderWidth: 2,
-                                            pointRadius: 1,
-                                            pointHitRadius: 10,
-            data: [5, 8, 14, 22, 25, 13,5, 5, 8, 14, 22, 25, 13,8, 14,22, 25, 13,8, 14,22, 25, 13,8, 14, 32, 22, 25, 13, 9]
-                                        }
-                                        ]
-                                    
-                                    
-                            };
-                            
                             const opt = {
                                 scales: {
                                     yAxes: [{
