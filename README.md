@@ -7,7 +7,8 @@
  >Skills : **React, Redux, GraphQL, MongoDB(Mongoose), Stripe Payment, Chart.js**
 ## 2. Demo
 ###  1) Ordering part
-    RESTful API accessing MongoDB(Mongoose) on Node.js  <iframe width="1350" height="768" src="https://www.youtube.com/embed/JDYVS9sSITg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    RESTful API accessing MongoDB(Mongoose) on Node.js  
+    `<iframe width="1350" height="768" src="https://www.youtube.com/embed/JDYVS9sSITg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
 
 
 ###  2) Statistics part
