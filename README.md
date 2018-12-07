@@ -8,10 +8,9 @@
 ## 2. Demo
 ###  1) Ordering part
     RESTful API accessing MongoDB(Mongoose) on Node.js  
-
+    Youtube Link - https://www.youtube.com/embed/JDYVS9sSITg
 
 
 ###  2) Statistics part
     GraphQL and Chart.js
-<iframe width="600" height="400" src="https://www.youtube.com/embed/JDYVS9sSITg" frameborder="0" gesture="media" allowfullscreen></iframe>
-
+    Youtube Link - https://www.youtube.com/watch?v=cJ_F-wEjnx0&t=27s
