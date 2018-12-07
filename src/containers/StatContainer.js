@@ -29,7 +29,8 @@ const { Header, Sider, Content } = Layout
 // Set up our apollo-client to point at the server we created
 // this can be local or a remote endpoint
 
-const link = createHttpLink({ uri: 'http://localhost:4000/graphql' })
+//const link = createHttpLink({ uri: 'http://localhost:4000/graphql' })
+const link = createHttpLink({ uri: 'http://18.219.68.114:4000/graphql' })
 
 
 // https://www.apollographql.com/docs/react/advanced/caching.html#dataIdFromObject
