@@ -1,6 +1,7 @@
 ```markdown
 <iframe width="600" height="400" src="https://www.youtube.com/embed/JDYVS9sSITg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 ```
+<<<<<<< HEAD
 this is
 <iframe width="600" height="400" src="https://www.youtube.com/embed/JDYVS9sSITg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -19,3 +20,7 @@ this is
 ###  2) Statistics part
     GraphQL and Chart.js
    <iframe width="640" height="360" src="https://www.youtube.com/watch?v=cJ_F-wEjnx0" frameborder="0" gesture="media" allowfullscreen=""></iframe>
+=======
+asd
+<iframe width="600" height="400" src="https://www.youtube.com/embed/JDYVS9sSITg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+>>>>>>> 3ab0d272a979b69b90da5c783177ce89695f722f
