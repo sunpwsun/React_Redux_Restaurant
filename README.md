@@ -13,4 +13,4 @@ YouTube Link - <https://www.youtube.com/embed/JDYVS9sSITg>
 
 ###  2) Statistics part
     GraphQL and Chart.js
-    YouTube Link - <https://www.youtube.com/watch?v=cJ_F-wEjnx0&t=27s>
+YouTube Link - <https://www.youtube.com/watch?v=cJ_F-wEjnx0&t=27s>
