@@ -2,9 +2,9 @@
 
 
 ## 2. Demo
-##  1) Ordering part
+###  1) Ordering part
 
 
 
-##  2) Statistics part
+###  2) Statistics part
 
