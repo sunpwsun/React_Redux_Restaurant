@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import './LikesChart.css'
 import { Switch, Spin } from 'antd'
-//import LikesTable from '../MonthTable/MonthTable'
+import LikeTable from '../Table/LikeTable'
 import { getToday, getTomorrow, getRandomColor, getDateFromToday } from  '../../utils/utils'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -29,32 +29,32 @@ class LikesChart extends Component {
         let datasets = [
             {
                 label: 'Like',
-                backgroundColor: 'rgba(255,99,132,0.2)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
+                backgroundColor: 'rgba( 0, 99, 255, 0.5 )',
+                borderColor: 'rgba( 0, 99, 255, 1 )',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba( 0, 99, 255, 0.6 )',
+                hoverBorderColor: 'rgba( 0, 99, 255, 1 )',
                 data: []
             },
             {
                 label: 'Dislike',
-                backgroundColor: 'rgba(255,99,132,0.2)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
+                backgroundColor: 'rgba( 255, 0, 0, 0.5 )',
+                borderColor: 'rgba( 255, 0, 0, 1 )',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba( 255, 0, 0, 0.6 )',
+                hoverBorderColor: 'rgba( 255, 0, 0, 1 )',
                 data: []
             }
         ]
-        
+
         // building datasets
         menu.forEach(e => {
-            labels.push( menu.name )
+            labels.push( e.name )
             datasets[ 0 ].data.push( e.thumbUpUserID.length )
             datasets[ 1 ].data.push( e.thumbDownUserID.length )
         })
 
-        return { labels, datasets }
+        return { labels: labels, datasets: datasets }
     }
 
     render() {
@@ -87,16 +87,16 @@ class LikesChart extends Component {
                                     <Bar  
                                         data={graphData} 
                                         width={100}
-                                        height={50}
+                                        height={500}
                                         options={{
                                           maintainAspectRatio: false
                                         }} />               
                                 </div>
 
-                                {/* <div className='tableToggle'>
+                                <div className='tableToggle'>
                             
-                                    <MonthTable labels={graphData.labels} datasets={graphData.datasets} menus={menus}/>
-                                </div> */}
+                                    <LikeTable labels={graphData.labels} datasets={graphData.datasets} />
+                                </div>
                             </div>
                         )
                     }}

@@ -1,10 +1,10 @@
 import React, {Component, Fragment} from 'react'
-import './TodayTable.css'
+import './LikeTable.css'
 import { Switch, Table } from 'antd'
 
 
 
-class TodayTable extends Component {
+class LikeTable extends Component {
 
     state = {
         switch: false,
@@ -19,7 +19,6 @@ class TodayTable extends Component {
     }
 
     handleSortChange = (pagination, filters, sorter) => {
-console.log('Various parameters', pagination, filters, sorter)
         this.setState({
           sortedInfo: sorter
         })
@@ -27,19 +26,17 @@ console.log('Various parameters', pagination, filters, sorter)
 
     render() {
 
-        const { salesData, qtyData } = this.props
-console.log( 'salesData', salesData)     
-console.log( 'qtyData', qtyData)   
+        const { labels, datasets } = this.props
+ 
         let tableData = []
         
-        for( let i = 0 ; i < salesData.labels.length ; i++ ) {
-            let data = {}
-            data.key = i + 1
-            data.name = salesData.labels[ i ]
-            data.qty = qtyData.datasets[ 0 ].data[ i ]
-            data.total = salesData.datasets[ 0 ].data[ i ]
-
-            tableData.push( data )
+        for( let i = 0 ; i < labels.length ; i++ ) {
+            tableData.push( {
+                key : i + 1,
+                name : labels[ i ],
+                like : datasets[ 0 ].data[ i ],
+                dislike : datasets[ 1 ].data[ i ]
+            })
         }
 
 
@@ -55,18 +52,18 @@ console.log( 'qtyData', qtyData)
                 key: 'name'
             }, 
             {
-                title: 'Quantity',
-                dataIndex: 'qty',
-                key: 'qty',
-                sorter: (a, b) => a.qty - b.qty,
-                sortOrder: sortedInfo.columnKey === 'qty' && sortedInfo.order,
+                title: 'Like',
+                dataIndex: 'like',
+                key: 'like',
+                sorter: (a, b) => a.like - b.like,
+                sortOrder: sortedInfo.columnKey === 'like' && sortedInfo.order,
             }, 
             {
-                title: 'Total ($)',
-                dataIndex: 'total',
-                key: 'total',
-                sorter: (a, b) => a.total - b.total,
-                sortOrder: sortedInfo.columnKey === 'total' && sortedInfo.order,
+                title: 'Dislike',
+                dataIndex: 'dislike',
+                key: 'dislike',
+                sorter: (a, b) => a.dislike - b.dislike,
+                sortOrder: sortedInfo.columnKey === 'dislike' && sortedInfo.order,
             }
         ]
 
@@ -82,4 +79,4 @@ console.log( 'qtyData', qtyData)
     }
 }
 
-export default TodayTable
+export default LikeTable

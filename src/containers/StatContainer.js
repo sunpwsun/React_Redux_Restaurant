@@ -29,8 +29,7 @@ const { Header, Sider, Content } = Layout
 // Set up our apollo-client to point at the server we created
 // this can be local or a remote endpoint
 
-//const link = createHttpLink({ uri: 'http://localhost:4000/graphql' })
-const link = createHttpLink({ uri: 'http://18.219.68.114:4000/graphql' })
+const link = createHttpLink({ uri: 'http://localhost:4000/graphql' })
 
 
 // https://www.apollographql.com/docs/react/advanced/caching.html#dataIdFromObject
@@ -80,10 +79,10 @@ class StatContainer extends Component {
             chart = <div><MonthChart id={this.state.id} /></div>
         }
         else if( this.state.option == 3 ) {
-            chart = <div>  </div>
+            chart = <div style={{fontSize:50, textAlign:'center', color:'blue'}}> Coming soon</div>
         }
         else if( this.state.option == 4 ) {
-            chart = <div>  </div>
+            chart = <div style={{fontSize:50, textAlign:'center', color:'blue'}}> Coming soon</div>
         }
         else if( this.state.option == 5 ) {
             chart = <div><LikesChart id={this.state.id} /></div>

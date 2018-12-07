@@ -148,8 +148,15 @@ console.log("datasets ", datasets)
                         const opt = {
                             scales: {
                                 yAxes: [{
-                                    stacked: true
-                                }]
+                                    stacked: true,
+                                    ticks: {
+                                        // Include a dollar sign in the ticks
+                                        callback: function(value, index, values) {
+                                            return '$' + value;
+                                        }
+                                    }
+                                },
+                            ]
                             }
                         }
                         return (
