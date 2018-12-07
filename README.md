@@ -9,9 +9,11 @@
 ###  1) Ordering part
     RESTful API accessing MongoDB(Mongoose) on Node.js
 
+<iframe width="640" height="360" src="https://www.youtube.com/watch?v=JDYVS9sSITg" frameborder="0" gesture="media" allowfullscreen=""></iframe>
 
 
 ###  2) Statistics part
     GraphQL and Chart.js
 
+<iframe width="640" height="360" src="https://www.youtube.com/watch?v=cJ_F-wEjnx0" frameborder="0" gesture="media" allowfullscreen=""></iframe>
 
