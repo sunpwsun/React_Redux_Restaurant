@@ -21,7 +21,7 @@ import RestaurantSelect from '../components/RestaurantStatSelect/RestSelect'
 import OptionMenu from '../components/OptionMenu/OptionMenu'
 import TodayChart from '../components/Charts/TodayChart'
 import MonthChart from '../components/Charts/MonthChart'
-
+import LikesChart from '../components/Charts/LikesChart'
 
 const { Header, Sider, Content } = Layout
  
@@ -86,7 +86,7 @@ class StatContainer extends Component {
             chart = <div>  </div>
         }
         else if( this.state.option == 5 ) {
-            chart = <div>  </div>
+            chart = <div><LikesChart id={this.state.id} /></div>
         }
         else {
             chart =  <h2>ERROR</h2>

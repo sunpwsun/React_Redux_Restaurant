@@ -1,13 +1,13 @@
 import React, {Component, Fragment} from 'react'
 import './TodayChart.css'
-import { DatePicker, Spin } from 'antd'
+import { DatePicker, Spin, Divider } from 'antd'
 import moment from 'moment'
 import { getToday, getTomorrow, getRandomColor } from  '../../utils/utils'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import {Doughnut} from 'react-chartjs-2'
-import TodayTable from '../TodayTable/TodayTable'
+import TodayTable from '../Table/TodayTable'
 
 const GET_PAYMENTS = gql`
     query PaymentsDate($date: String!, $id: String!) {
@@ -82,17 +82,10 @@ class TodayChart extends Component {
         
         let salesLabels = []
         let salesDatasets = { data: [], backgroundColor: [] }
-        let salesOption = { title: {display: true, text: ['Total Sales'], fontStyle: 'bold', fontSize: 40, fontColor: '#06f'}, legend: {
-            display: true,
-            position: "top",
-            labels: {
-                fontColor: "#333",
-                fontSize: 12
-            }
-        }}
+        let salesOption = { _title: {display: true, text: ['Total Sales'], fontStyle: 'bold', fontSize: 40, fontColor: '#06f'}}
         let qtyLabels = []
         let qtyDatasets = { data: [], backgroundColor: [] }
-        let qtyOption = { title: {display: true, text: ['Number of Sold Dishes'], fontStyle: 'bold', fontSize: 40, fontColor: '#06f'}}
+        let qtyOption = { _title: {display: true, text: ['Number of Sold Dishes'], fontStyle: 'bold', fontSize: 40, fontColor: '#06f'}}
         let totalSalesToday = 0
         let totalQtyToday = 0
 
@@ -109,14 +102,14 @@ class TodayChart extends Component {
             qtyDatasets.backgroundColor.push( color )
         })
 
-        salesOption.title.text.push( '$ ' + totalSalesToday.toFixed(1) )
-        qtyOption.title.text.push( totalQtyToday )
+        salesOption._title.text.push( '$ ' + totalSalesToday.toFixed(1) )
+        qtyOption._title.text.push( totalQtyToday )
 
 
 
         const salesData = { labels: salesLabels, datasets:[ salesDatasets ], options: salesOption }
         const qtyData   = { labels: qtyLabels,   datasets:[ qtyDatasets ],   options: qtyOption }
-console.log(salesData, qtyData)
+//console.log(salesData, qtyData)
         return { salesData, qtyData }
     }
 
@@ -165,13 +158,17 @@ console.log( 'today ', today, 'id', this.props.id)
                                     </div>
                                 </div>    
                             </div>
-                                <div className='todayChartContainer'>
+                            <div className='todayChartContainer'>
                                 <div className='todayChartItem'>
-                                    
+                                    <div className='doughnutTitle' >{graphData.salesData.options._title.text[0]}</div>
+                                    <div className='doughnutTitle' >{graphData.salesData.options._title.text[1]}</div>
+                                    <hr />
                                     <Doughnut data={graphData.salesData} options={graphData.salesData.options} />
                                 </div>
                                 <div className='todayChartItem'>
-                                    
+                                    <div className='doughnutTitle' >{graphData.qtyData.options._title.text[0]}</div>
+                                    <div className='doughnutTitle' >{graphData.qtyData.options._title.text[1]}</div>
+                                    <hr />
                                     <Doughnut data={graphData.qtyData} options={graphData.qtyData.options}/>
                                 </div>
                                 

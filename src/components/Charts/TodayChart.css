@@ -72,3 +72,10 @@
 .chartBody {
     overflow: auto;
 }
+
+.doughnutTitle {
+    font-weight: bold;
+    font-size: 2.2rem;
+    color: #01d;
+    text-align: center;
+}

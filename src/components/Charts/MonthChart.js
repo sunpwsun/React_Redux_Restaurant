@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import './MonthChart.css'
 import { Switch, Spin } from 'antd'
-import MonthTable from '../MonthTable/MonthTable'
+import MonthTable from '../Table/MonthTable'
 import { getToday, getTomorrow, getRandomColor, getDateFromToday } from  '../../utils/utils'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -123,8 +123,8 @@ console.log("datasets ", datasets)
 
                     {({ data, loading, error }) => {
             
-                        if (loading) return <p>Menu Loading...</p>
-                        if (error) return <p>Menu ERROR</p>
+                        if (loading) return <div><Spin className='loading' tip='Loading...' size='large' /></div>
+                        if (error) return <p>!!! ERROR when fetching menu </p>
 
                         menus = data.menus
             
@@ -136,9 +136,7 @@ console.log("datasets ", datasets)
                 
                     {({ data, loading, error }) => {
                         if (loading) return <div><Spin className='loading' tip='Loading...' size='large' /></div>
-                        if (error) return <p>ERROR</p>
-//     console.log("dailySalesPeriod - ", data.dailySalesPeriod)
-// console.log('menu A- ', menus)
+                        if (error) return <p>!!! ERROR when fetching sales fugures </p>
                         
                         const graphData = this.makeGraphData( data.dailySalesPeriod, menus )
 
