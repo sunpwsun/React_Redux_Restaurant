@@ -162,7 +162,7 @@ console.log("datasets ", datasets)
                         return (
                         
                             <div>
-                                <div className='monthTitle'>Last 30 Days Salse Figures</div>
+                                <div className='monthTitle'>Last 30 Days Sales Figures</div>
                                 <div className='lineChart'>                                       
                                         <Line  data={lineGraphData} options={opt} />               
                                 </div>
