@@ -129,7 +129,7 @@ class SignUpForm extends Component {
 
             <div>
                 <Title />
-                <div className='login-form'>
+                <div className='login-form' style={{width:600}}>
                     <Form onSubmit={this.handleSubmit}>
                         <FormItem
                         {...formItemLayout}
@@ -161,7 +161,7 @@ class SignUpForm extends Component {
                         </FormItem>
                         <FormItem
                             {...formItemLayout}
-                            label="Confirm Password"
+                            label="Confirm"
                         >
                             {getFieldDecorator('confirm', {
                                 rules: [{

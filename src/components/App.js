@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import SignIn from './SignIn/SignIn'
+import Init from './Init/Init'
 import SignUp from './SignUp/SignUp'
 import AppContainer from '../containers/AppContainer'
 import MenuListContainer from '../containers/MenuListContainer'
@@ -27,13 +28,15 @@ class App extends Component {
      
         return (
             <div>
-                <Route exact path = '/'                 component = {SignIn} />
+                {/* <Route exact path = '/'                 component = {SignIn} /> */}
+                <Route exact path = '/'                 component = {Init} />
                 <Route       path = '/signup'           component = {SignUp} />
                 <Route       path = '/restaurant'       component = {AppContainer} />
                 <Route       path = '/menu'             component = {MenuListContainer} />
                 <Route       path = '/stat'             component = {StatContainer} />
               
             </div>
+
         )
     }
 }
