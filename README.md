@@ -17,3 +17,4 @@ YouTube Link - <https://www.youtube.com/watch?v=cJ_F-wEjnx0&t=27s>
 
 ![stat1](https://user-images.githubusercontent.com/26329771/51081453-c6b6a780-16bd-11e9-8dc2-7d40f317915e.gif)
 
+![stat2](https://user-images.githubusercontent.com/26329771/51081465-eb128400-16bd-11e9-9451-86a8c3dff61e.gif)
